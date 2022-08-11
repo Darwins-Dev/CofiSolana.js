@@ -212,6 +212,42 @@ exports.IDL = {
             "args": []
         },
         {
+            "name": "initAssociatedCofiAcc",
+            "accounts": [
+                {
+                    "name": "initializer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "owner",
+                    "isMut": false,
+                    "isSigner": true
+                },
+                {
+                    "name": "account",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "mint",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "rent",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        },
+        {
             "name": "deposit",
             "docs": [
                 "main logic"
