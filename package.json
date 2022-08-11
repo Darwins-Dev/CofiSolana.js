@@ -1,5 +1,5 @@
 {
-  "name": "cofi-solana",
+  "name": "cofisolana.js",
   "version": "0.0.1",
   "description": "client-side node package to interact with cofi solana program",
   "main": "./dist/index.js",
