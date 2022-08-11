@@ -1,6 +1,5 @@
 import { ACCOUNTS, ClusterType } from '../utils/constants';
-import * as cofi from '../types/cofi';
-import * as cofiStrategy from '../types/cofi_strategy'; 
+import { cofi, cofiStrategy } from '../types';
 import { web3, Provider, Program, BN } from '@project-serum/anchor';
 
 export async function unstakeInstruction(
