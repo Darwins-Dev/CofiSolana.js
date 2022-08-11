@@ -2,7 +2,7 @@ import { ACCOUNTS, ClusterType } from '../utils/constants';
 import { cofi, cofiStrategy } from '../types';
 import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/anchor';
 
-export async function initCofiAccountInstruction(
+export async function initCofiStake(
   version: number,
   cluster: ClusterType,
   payer: web3.PublicKey,
