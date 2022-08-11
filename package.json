@@ -1,6 +1,6 @@
 {
   "name": "cofisolana.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "client-side node package to interact with cofi solana program",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
