@@ -1,7 +1,7 @@
 import { ClusterType } from '../utils/constants';
 import { cofi } from '../types';
 import { web3, Provider } from '@project-serum/anchor';
-export declare function getStakeAccount(cluster: ClusterType, provider: Provider, staker: web3.PublicKey, beneficiary: web3.PublicKey): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
+export declare function getStakeAccount(cluster: ClusterType, provider: Provider, publicKey: web3.PublicKey): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
     name: "cofiAccount";
     type: {
         kind: "struct";
@@ -116,3 +116,4 @@ export declare function getStakeAccount(cluster: ClusterType, provider: Provider
         }];
     };
 }, import("@project-serum/anchor").IdlTypes<cofi.Cofi>>>;
+export declare function getStakeAccountAddress(cluster: ClusterType, staker: web3.PublicKey, beneficiary: web3.PublicKey): Promise<web3.PublicKey>;

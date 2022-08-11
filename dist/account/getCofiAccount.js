@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCofiAccount = void 0;
+exports.getAssociatedCofiAccountAddress = exports.getCofiAccount = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
@@ -20,3 +20,11 @@ function getCofiAccount(cluster, provider, publicKey) {
     });
 }
 exports.getCofiAccount = getCofiAccount;
+function getAssociatedCofiAccountAddress(cluster, owner) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return (yield anchor_1.web3.PublicKey.findProgramAddress([
+            Buffer.from('cofi_account', 'utf-8'), owner.toBuffer(),
+        ], constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
+    });
+}
+exports.getAssociatedCofiAccountAddress = getAssociatedCofiAccountAddress;

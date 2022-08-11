@@ -9,17 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStakeAccount = void 0;
+exports.getStakeAccountAddress = exports.getStakeAccount = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function getStakeAccount(cluster, provider, staker, beneficiary) {
+function getStakeAccount(cluster, provider, publicKey) {
     return __awaiter(this, void 0, void 0, function* () {
         const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-        const [stakePairAccount,] = yield anchor_1.web3.PublicKey.findProgramAddress([
-            Buffer.from("cofi_stake", 'utf-8'), staker.toBuffer(), beneficiary.toBuffer(),
-        ], cofiProgram.programId);
-        return cofiProgram.account.cofiStake.fetch(stakePairAccount);
+        return cofiProgram.account.cofiStake.fetch(publicKey);
     });
 }
 exports.getStakeAccount = getStakeAccount;
+function getStakeAccountAddress(cluster, staker, beneficiary) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return (yield anchor_1.web3.PublicKey.findProgramAddress([
+            Buffer.from("cofi_stake", 'utf-8'), staker.toBuffer(), beneficiary.toBuffer(),
+        ], constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
+    });
+}
+exports.getStakeAccountAddress = getStakeAccountAddress;

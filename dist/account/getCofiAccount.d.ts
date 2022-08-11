@@ -116,3 +116,4 @@ export declare function getCofiAccount(cluster: ClusterType, provider: Provider,
         }];
     };
 }, import("@project-serum/anchor").IdlTypes<cofi.Cofi>>>;
+export declare function getAssociatedCofiAccountAddress(cluster: ClusterType, owner: web3.PublicKey): Promise<web3.PublicKey>;
