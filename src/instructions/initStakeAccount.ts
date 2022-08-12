@@ -5,12 +5,13 @@ import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/ancho
 export async function initCofiStake(
   version: number,
   cluster: ClusterType,
+  provider: Provider,
   payer: web3.PublicKey,
   staker: web3.PublicKey,
   beneficiary: web3.PublicKey,
 ): Promise<web3.TransactionInstruction> {
   const cofiProgram = 
-    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster));
+    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
   let [stakePairAccount, stakePairAccountBump] = await web3.PublicKey.findProgramAddress([
     Buffer.from("cofi_stake", 'utf-8'), staker.toBuffer(), beneficiary.toBuffer(),
   ], cofiProgram.programId);

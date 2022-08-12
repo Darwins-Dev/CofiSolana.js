@@ -5,6 +5,7 @@ import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/ancho
 export async function withdrawInstruction(
   version: number,
   cluster: ClusterType,
+  provider: Provider,
   cofiAccountAuthority: web3.PublicKey,
   sourceCofiAccount: web3.PublicKey,
   destinationLiquidityAccount: web3.PublicKey,
@@ -12,9 +13,7 @@ export async function withdrawInstruction(
   amount: BN,
 ): Promise<web3.TransactionInstruction> {
   const cofiProgram = 
-    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster));
-  const strategyProgram = 
-    new Program<cofiStrategy.CofiStrategy>(cofiStrategy.IDL, ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
+    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
   const tokenProgram: Program<SplToken> = Spl.token();
 
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
@@ -30,7 +29,7 @@ export async function withdrawInstruction(
       cofiMint,
       cofiStrategy: strategy,
       cofiMintCollateralReserve: collateralReserve,
-      cofiStrategyProgram: strategyProgram.programId,
+      cofiStrategyProgram: ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
       clock: web3.SYSVAR_CLOCK_PUBKEY,
     }).remainingAccounts([{
       pubkey: ACCOUNTS.SOLEND_PROGRAM_ID(cluster),

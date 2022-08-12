@@ -13,10 +13,9 @@ exports.withdrawInstruction = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function withdrawInstruction(version, cluster, cofiAccountAuthority, sourceCofiAccount, destinationLiquidityAccount, feeReceiverAccount, amount) {
+function withdrawInstruction(version, cluster, provider, cofiAccountAuthority, sourceCofiAccount, destinationLiquidityAccount, feeReceiverAccount, amount) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster));
-        const strategyProgram = new anchor_1.Program(types_1.cofiStrategy.IDL, constants_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
+        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         const tokenProgram = anchor_1.Spl.token();
         const cofiMint = yield constants_1.ACCOUNTS.COFI_MINT(version, cluster);
         const strategy = yield constants_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
@@ -30,7 +29,7 @@ function withdrawInstruction(version, cluster, cofiAccountAuthority, sourceCofiA
             cofiMint,
             cofiStrategy: strategy,
             cofiMintCollateralReserve: collateralReserve,
-            cofiStrategyProgram: strategyProgram.programId,
+            cofiStrategyProgram: constants_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
             clock: anchor_1.web3.SYSVAR_CLOCK_PUBKEY,
         }).remainingAccounts([{
                 pubkey: constants_1.ACCOUNTS.SOLEND_PROGRAM_ID(cluster),

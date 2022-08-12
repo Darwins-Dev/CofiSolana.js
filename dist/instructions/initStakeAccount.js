@@ -13,9 +13,9 @@ exports.initCofiStake = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function initCofiStake(version, cluster, payer, staker, beneficiary) {
+function initCofiStake(version, cluster, provider, payer, staker, beneficiary) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster));
+        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         let [stakePairAccount, stakePairAccountBump] = yield anchor_1.web3.PublicKey.findProgramAddress([
             Buffer.from("cofi_stake", 'utf-8'), staker.toBuffer(), beneficiary.toBuffer(),
         ], cofiProgram.programId);

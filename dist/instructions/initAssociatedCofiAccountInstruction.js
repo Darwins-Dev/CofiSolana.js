@@ -13,10 +13,9 @@ exports.initAssociatedCofiAccountInstruction = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function initAssociatedCofiAccountInstruction(version, cluster, payer, owner) {
+function initAssociatedCofiAccountInstruction(version, cluster, provider, payer, owner) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster));
-        const strategyProgram = new anchor_1.Program(types_1.cofiStrategy.IDL, constants_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
+        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         const cofiMint = yield constants_1.ACCOUNTS.COFI_MINT(version, cluster);
         const [associatedCofiAccountAddress,] = yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_account', 'utf-8'), owner.toBuffer(),], cofiProgram.programId);
         return yield cofiProgram.methods.initAssociatedCofiAcc()

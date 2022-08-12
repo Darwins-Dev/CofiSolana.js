@@ -1,20 +1,19 @@
 import { ACCOUNTS, ClusterType } from '../utils/constants';
 import { cofi, cofiStrategy } from '../types';
 import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/anchor';
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 export async function depositInstruction(
   version: number,
   cluster: ClusterType,
+  provider: Provider,
   sourceLiquidityAuthority: web3.PublicKey,
   sourceLiquidityAccount: web3.PublicKey,
   destinationCofiAccount: web3.PublicKey,
   amount: BN,
 ): Promise<web3.TransactionInstruction> {
   const cofiProgram = 
-    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster));
-  const strategyProgram = 
-    new Program<cofiStrategy.CofiStrategy>(cofiStrategy.IDL, ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
-  const tokenProgram: Program<SplToken> = Spl.token();
+    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
 
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
@@ -28,7 +27,7 @@ export async function depositInstruction(
       cofiMint,
       cofiStrategy: strategy,
       cofiMintCollateralReserve: collateralReserve,
-      cofiStrategyProgram: strategyProgram.programId,
+      cofiStrategyProgram: ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
       clock: web3.SYSVAR_CLOCK_PUBKEY,
     }).remainingAccounts([{
         pubkey: ACCOUNTS.SOLEND_PROGRAM_ID(cluster),
@@ -63,7 +62,7 @@ export async function depositInstruction(
         isSigner: false,
         isWritable: false,
       },{
-        pubkey: tokenProgram.programId,
+        pubkey: TOKEN_PROGRAM_ID,
         isSigner: false,
         isWritable: false,
       },

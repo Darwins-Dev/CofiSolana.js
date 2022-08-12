@@ -13,10 +13,9 @@ exports.initCofiAccountInstruction = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function initCofiAccountInstruction(version, cluster, payer, owner, account) {
+function initCofiAccountInstruction(version, cluster, provider, payer, owner, account) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster));
-        const strategyProgram = new anchor_1.Program(types_1.cofiStrategy.IDL, constants_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
+        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         const cofiMint = yield constants_1.ACCOUNTS.COFI_MINT(version, cluster);
         return yield cofiProgram.methods.initCofiAcc()
             .accounts({

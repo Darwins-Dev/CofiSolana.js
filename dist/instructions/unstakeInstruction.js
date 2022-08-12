@@ -13,10 +13,9 @@ exports.unstakeInstruction = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function unstakeInstruction(version, cluster, stakerAuthority, staker, beneficiary, amount) {
+function unstakeInstruction(version, cluster, provider, stakerAuthority, staker, beneficiary, amount) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster));
-        const strategyProgram = new anchor_1.Program(types_1.cofiStrategy.IDL, constants_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
+        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         const [stakePairAccount, stakePairAccountBump] = yield anchor_1.web3.PublicKey.findProgramAddress([
             Buffer.from("cofi_stake", 'utf-8'), staker.toBuffer(), beneficiary.toBuffer(),
         ], cofiProgram.programId);
@@ -30,7 +29,7 @@ function unstakeInstruction(version, cluster, stakerAuthority, staker, beneficia
             cofiStakePair: stakePairAccount,
             cofiMint,
             cofiStrategy: strategy,
-            cofiStrategyProgram: strategyProgram.programId,
+            cofiStrategyProgram: constants_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
             clock: anchor_1.web3.SYSVAR_CLOCK_PUBKEY,
         }).remainingAccounts([
             {

@@ -5,14 +5,13 @@ import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/ancho
 export async function initCofiAccountInstruction(
   version: number,
   cluster: ClusterType,
+  provider: Provider,
   payer: web3.PublicKey,
   owner: web3.PublicKey,
   account: web3.PublicKey,
 ): Promise<web3.TransactionInstruction> {
   const cofiProgram = 
-    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster));
-  const strategyProgram = 
-    new Program<cofiStrategy.CofiStrategy>(cofiStrategy.IDL, ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
+    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
 
   return await cofiProgram.methods.initCofiAcc()

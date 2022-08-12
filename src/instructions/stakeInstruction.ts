@@ -5,15 +5,14 @@ import { web3, Provider, Program, BN } from '@project-serum/anchor';
 export async function stakeInstruction(
   version: number,
   cluster: ClusterType,
+  provider: Provider,
   stakerAuthority: web3.PublicKey,
   staker: web3.PublicKey,
   beneficiary: web3.PublicKey,
   amount: BN,
 ): Promise<web3.TransactionInstruction> {
   const cofiProgram = 
-    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster));
-  const strategyProgram = 
-    new Program<cofiStrategy.CofiStrategy>(cofiStrategy.IDL, ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
+    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
   const [stakePairAccount, stakePairAccountBump] = await web3.PublicKey.findProgramAddress([
     Buffer.from("cofi_stake", 'utf-8'), staker.toBuffer(), beneficiary.toBuffer(),
   ], cofiProgram.programId);
@@ -29,7 +28,7 @@ export async function stakeInstruction(
       cofiStakePair: stakePairAccount,
       cofiMint,
       cofiStrategy: strategy,
-      cofiStrategyProgram: strategyProgram.programId,
+      cofiStrategyProgram: ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
       clock: web3.SYSVAR_CLOCK_PUBKEY,  
     }).remainingAccounts([
       {

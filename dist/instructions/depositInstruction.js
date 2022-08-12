@@ -13,11 +13,10 @@ exports.depositInstruction = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function depositInstruction(version, cluster, sourceLiquidityAuthority, sourceLiquidityAccount, destinationCofiAccount, amount) {
+const spl_token_1 = require("@solana/spl-token");
+function depositInstruction(version, cluster, provider, sourceLiquidityAuthority, sourceLiquidityAccount, destinationCofiAccount, amount) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster));
-        const strategyProgram = new anchor_1.Program(types_1.cofiStrategy.IDL, constants_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster));
-        const tokenProgram = anchor_1.Spl.token();
+        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         const cofiMint = yield constants_1.ACCOUNTS.COFI_MINT(version, cluster);
         const strategy = yield constants_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
         const collateralReserve = yield constants_1.ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
@@ -29,7 +28,7 @@ function depositInstruction(version, cluster, sourceLiquidityAuthority, sourceLi
             cofiMint,
             cofiStrategy: strategy,
             cofiMintCollateralReserve: collateralReserve,
-            cofiStrategyProgram: strategyProgram.programId,
+            cofiStrategyProgram: constants_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
             clock: anchor_1.web3.SYSVAR_CLOCK_PUBKEY,
         }).remainingAccounts([{
                 pubkey: constants_1.ACCOUNTS.SOLEND_PROGRAM_ID(cluster),
@@ -64,7 +63,7 @@ function depositInstruction(version, cluster, sourceLiquidityAuthority, sourceLi
                 isSigner: false,
                 isWritable: false,
             }, {
-                pubkey: tokenProgram.programId,
+                pubkey: spl_token_1.TOKEN_PROGRAM_ID,
                 isSigner: false,
                 isWritable: false,
             },
