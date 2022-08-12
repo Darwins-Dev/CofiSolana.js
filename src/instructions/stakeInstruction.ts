@@ -9,6 +9,7 @@ export async function stakeInstruction(
   stakerAuthority: web3.PublicKey,
   staker: web3.PublicKey,
   beneficiary: web3.PublicKey,
+  feeReceiverAccount: web3.PublicKey,
   amount: BN,
 ): Promise<web3.TransactionInstruction> {
   const cofiProgram = 
@@ -27,6 +28,7 @@ export async function stakeInstruction(
       beneficiaryCofiAccount: beneficiary,
       cofiStakePair: stakePairAccount,
       cofiMint,
+      feeReceiverAccount, 
       cofiStrategy: strategy,
       cofiStrategyProgram: ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
       clock: web3.SYSVAR_CLOCK_PUBKEY,  

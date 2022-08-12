@@ -21,3 +21,4 @@ __exportStar(require("./depositInstruction"), exports);
 __exportStar(require("./withdrawInstruction"), exports);
 __exportStar(require("./stakeInstruction"), exports);
 __exportStar(require("./unstakeInstruction"), exports);
+__exportStar(require("./mergeAccountsInstruction"), exports);

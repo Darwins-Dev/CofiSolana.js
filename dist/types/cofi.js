@@ -391,6 +391,11 @@ exports.IDL = {
                     "isSigner": false
                 },
                 {
+                    "name": "feeReceiverAccount",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
                     "name": "cofiStrategyProgram",
                     "isMut": false,
                     "isSigner": false
@@ -458,6 +463,32 @@ exports.IDL = {
                     "type": "u64"
                 }
             ]
+        },
+        {
+            "name": "mergeAccounts",
+            "accounts": [
+                {
+                    "name": "sourceAccountAuthority",
+                    "isMut": false,
+                    "isSigner": true
+                },
+                {
+                    "name": "sourceCofiAccount",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "destinationCofiAccount",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiMint",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
         },
         {
             "name": "pauseOrUnpause",
