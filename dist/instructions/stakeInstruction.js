@@ -34,7 +34,7 @@ function stakeInstruction(version, cluster, provider, stakerAuthority, staker, b
             clock: anchor_1.web3.SYSVAR_CLOCK_PUBKEY,
         }).remainingAccounts([
             {
-                pubkey: constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster),
+                pubkey: constants_1.ACCOUNTS.SOLEND_PROGRAM_ID(cluster),
                 isSigner: false,
                 isWritable: false,
             }, {

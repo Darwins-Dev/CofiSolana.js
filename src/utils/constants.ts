@@ -14,6 +14,10 @@ export const DEVNET_SOL_RESERVE = new web3.PublicKey("5VVLD7BQp8y3bTgyF5ezm1Resy
 export const DEVNET_SOL_CTOKEN = new web3.PublicKey("FzwZWRMc3GCqjSrcpVX3ueJc6UpcV6iWWb7ZMsTXE3Gf");
 export const DEVNET_SOL_RESERVE_LIQ_SUPPLY = new web3.PublicKey("furd3XUtjXZ2gRvSsoUts9A5m8cMJNqdsyR2Rt8vY9s");
 
+export const DEVNET_SIMP_MINT = new web3.PublicKey("8HFjaos5KaoP25VU3XAnHxacymHV2qEcM95Kw7RKJetn");
+export const DEVNET_SIMP_CTOKEN = new web3.PublicKey("DHrXwJAeCZmwpV2FbrQ2HerC2Jo8ZhBZeLJkpiPgEr2G");
+export const DEVNET_SIMP_LIQ_SUPPLY = new web3.PublicKey("Bpy8EA7SLCbkppEHWfXTCwNzdYePjH5rm7sPsmdN7a95");
+
 export const MAINNET_PROGRAM_ID = new web3.PublicKey("So1endDq2YkqhipRh3WViPa8hdiSpxWy6z3Z6tMCpAo");
 export const MAINNET_LENDING_MARKET = new web3.PublicKey("4UpD2fh7xH3VP9QQaXtsS1YY3bxzWhtfpks7FatyKvdY");
 export const MAINNET_LENDING_MARKET_AUTH = new web3.PublicKey("DdZR6zRFiUt4S5mg7AV1uKB2z1f1WzcNYCaTEEWPAuby");
@@ -26,12 +30,18 @@ export const MAINNET_USDC_MINT = new web3.PublicKey("EPjFWdd5AufqSSqeM2qN1xzybap
 export const DEVNET_COFI_SOL = new web3.PublicKey("2Xi8qBg2T66Q6SDoLq4mwU7wW3Yf4SAFZRocD2nZdzAe");
 export const DEVNET_COFI_STRATEGY_SOL = new web3.PublicKey("9MKNtecXPBb6WxF36fhDDX1tBqTe4LeuCYfkgmUUkpaq");
 
-export type ClusterType = "devnet" | "mainnet";
+export const DEVNET_COFI_SIMP = new web3.PublicKey("BLG2ZfiVKRWtcy1aqAjeUFabRtkRA7y7HsBmodfyh6gh");
+export const DEVNET_COFI_STRATEGY_SIMP = new web3.PublicKey("Gp3ppaJZbbtJtBGBNbKbyZSjibKXmDZj1MRb2PUN3xai");
+
+export const DEVNET_COFI_SIMP_FEE_RECEIVER = new web3.PublicKey("FXccWBWFZ6HxoaYgVmb6PPPLQ7UhEsMMEi3gHHZDKBTG");
+
+export type ClusterType = "devnet" | "mainnet" | "simp";
 
 export const ACCOUNTS = {
   SOLEND_PROGRAM_ID: (cluster: ClusterType): web3.PublicKey=>{
     switch(cluster) {
       case "devnet":
+      case "simp":
         return DEVNET_PROGRAM_ID
       case "mainnet":
         return MAINNET_PROGRAM_ID
@@ -40,6 +50,7 @@ export const ACCOUNTS = {
   SOLEND_LENDING_MARKET: (cluster: ClusterType): web3.PublicKey=>{
     switch(cluster) {
       case "devnet":
+      case "simp":
         return DEVNET_LENDING_MARKET
       case "mainnet":
         return MAINNET_LENDING_MARKET
@@ -48,6 +59,7 @@ export const ACCOUNTS = {
   SOLEND_LENDING_MARKET_AUTH: (cluster: ClusterType): web3.PublicKey=>{
     switch(cluster) {
       case "devnet":
+      case "simp":
         return DEVNET_LENDING_MARKET_AUTH
       case "mainnet":
         return MAINNET_LENDING_MARKET_AUTH
@@ -55,6 +67,7 @@ export const ACCOUNTS = {
   },
   SOLEND_RESERVE: (cluster: ClusterType): web3.PublicKey=>{
     switch(cluster) {
+      case "simp":
       case "devnet":
         return DEVNET_SOL_RESERVE
       case "mainnet":
@@ -65,6 +78,8 @@ export const ACCOUNTS = {
     switch(cluster) {
       case "devnet":
         return DEVNET_SOL_RESERVE_LIQ_SUPPLY
+      case "simp":
+        return DEVNET_SIMP_LIQ_SUPPLY
       case "mainnet":
         return MAINNET_USDC_RESERVE_LIQ_SUPPLY
     }
@@ -73,6 +88,8 @@ export const ACCOUNTS = {
     switch(cluster) {
       case "devnet":
         return DEVNET_SOL_CTOKEN
+      case "simp":
+        return DEVNET_SIMP_CTOKEN
       case "mainnet":
         return MAINNET_USDC_CTOKEN
     }
@@ -81,15 +98,40 @@ export const ACCOUNTS = {
     switch(cluster) {
       case "devnet":
         return DEVNET_SOL_MINT
+      case "simp":
+        return DEVNET_SIMP_MINT
       case "mainnet":
         return MAINNET_USDC_MINT
     }
   },
+  COFI_FEE_RECEIVER: (cluster: ClusterType): web3.PublicKey=>{
+    switch(cluster) {
+      case "devnet":
+      case "simp":
+      case "mainnet":
+        return DEVNET_COFI_SIMP_FEE_RECEIVER
+    }
+  },
   COFI_PROGRAM_ID: (cluster: ClusterType): web3.PublicKey=>{
+    switch(cluster) {
+      case "devnet":
+        return DEVNET_COFI_SOL
+      case "simp":
+        return DEVNET_COFI_SIMP
+      case "mainnet":
+        throw new Error("MAINNET NOT READY YET")
+    }
     return DEVNET_COFI_SOL
   },
   COFI_STRATEGY_PROGRAM_ID: (cluster: ClusterType): web3.PublicKey=>{
-    return DEVNET_COFI_STRATEGY_SOL
+    switch(cluster) {
+      case "devnet":
+        return DEVNET_COFI_STRATEGY_SOL
+      case "simp":
+        return DEVNET_COFI_STRATEGY_SIMP
+      case "mainnet":
+        throw new Error("MAINNET NOT READY YET")
+    }
   },
   COFI_MINT: async (version: number, cluster: ClusterType): Promise<web3.PublicKey> => {
     return (await web3.PublicKey.findProgramAddress(

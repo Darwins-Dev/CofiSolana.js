@@ -32,7 +32,7 @@ export async function unstakeInstruction(
       clock: web3.SYSVAR_CLOCK_PUBKEY,  
     }).remainingAccounts([
       {
-        pubkey: ACCOUNTS.COFI_PROGRAM_ID(cluster),
+        pubkey: ACCOUNTS.SOLEND_PROGRAM_ID(cluster),
         isSigner: false,
         isWritable: false,
       },{

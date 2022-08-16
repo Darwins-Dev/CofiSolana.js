@@ -772,6 +772,23 @@ exports.IDL = {
             }
         }
     ],
+    "events": [
+        {
+            "name": "MyEvent",
+            "fields": [
+                {
+                    "name": "someValue",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "anotherValue",
+                    "type": "u128",
+                    "index": false
+                }
+            ]
+        }
+    ],
     "errors": [
         {
             "code": 6000,
