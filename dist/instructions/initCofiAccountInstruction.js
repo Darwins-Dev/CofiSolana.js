@@ -10,13 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initCofiAccountInstruction = void 0;
-const constants_1 = require("../utils/constants");
+const address_1 = require("../utils/address");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function initCofiAccountInstruction(version, cluster, provider, payer, owner, account) {
+function initCofiAccountInstruction(cofiSolanaConfig, payer, owner, account) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-        const cofiMint = yield constants_1.ACCOUNTS.COFI_MINT(version, cluster);
+        const { version, cluster, provider } = cofiSolanaConfig;
+        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
+        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
         return yield cofiProgram.methods.initCofiAcc()
             .accounts({
             initializer: payer,

@@ -1,7 +1,6 @@
-import { ClusterType } from '../utils/constants';
-import { cofi } from '../types';
-import { Provider, web3 } from '@project-serum/anchor';
-export declare function getCofiMintAccount(version: number, cluster: ClusterType, provider: Provider): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
+import { cofi, CofiSolanaConfig } from '../types';
+import { web3 } from '@project-serum/anchor';
+export declare function getCofiMintAccount(cofiSolanaConfig: CofiSolanaConfig): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
     name: "cofiAccount";
     type: {
         kind: "struct";
@@ -116,4 +115,4 @@ export declare function getCofiMintAccount(version: number, cluster: ClusterType
         }];
     };
 }, import("@project-serum/anchor").IdlTypes<cofi.Cofi>>>;
-export declare function getCofiMintAddress(version: number, cluster: ClusterType): Promise<web3.PublicKey>;
+export declare function getCofiMintAddress(cofiSolanaConfig: CofiSolanaConfig): Promise<web3.PublicKey>;

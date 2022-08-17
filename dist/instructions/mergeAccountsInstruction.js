@@ -10,17 +10,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mergeAccountsInstruction = void 0;
-const constants_1 = require("../utils/constants");
+const address_1 = require("../utils/address");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function mergeAccountsInstruction(version, cluster, provider, owner, sourceAccount, destinationAccount) {
+function mergeAccountsInstruction(cofiSolanaConfig, owner, sourceAccount, destinationAccount) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
+        const { version, cluster, provider } = cofiSolanaConfig;
+        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         return yield cofiProgram.methods.mergeAccounts().accounts({
             sourceAccountAuthority: owner,
             sourceCofiAccount: sourceAccount,
             destinationCofiAccount: destinationAccount,
-            cofiMint: yield constants_1.ACCOUNTS.COFI_MINT(version, cluster),
+            cofiMint: yield address_1.ACCOUNTS.COFI_MINT(version, cluster),
         }).instruction();
     });
 }

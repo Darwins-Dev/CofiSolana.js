@@ -1,17 +1,18 @@
-import { ACCOUNTS, ClusterType } from '../utils/constants';
-import { cofi, cofiStrategy } from '../types';
+import { ACCOUNTS, } from '../utils/address';
+import { cofi, cofiStrategy, CofiSolanaConfig} from '../types';
 import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/anchor';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 export async function depositInstruction(
-  version: number,
-  cluster: ClusterType,
-  provider: Provider,
+  cofiSolanaConfig: CofiSolanaConfig, 
   sourceLiquidityAuthority: web3.PublicKey,
   sourceLiquidityAccount: web3.PublicKey,
   destinationCofiAccount: web3.PublicKey,
   amount: BN,
 ): Promise<web3.TransactionInstruction> {
+  const {
+    version, cluster, provider
+  } = cofiSolanaConfig;
   const cofiProgram = 
     new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
 

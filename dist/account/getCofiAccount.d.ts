@@ -1,7 +1,6 @@
-import { ClusterType } from '../utils/constants';
-import { cofi } from '../types';
-import { web3, Provider } from '@project-serum/anchor';
-export declare function getCofiAccount(cluster: ClusterType, provider: Provider, publicKey: web3.PublicKey): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
+import { cofi, CofiSolanaConfig } from '../types';
+import { web3 } from '@project-serum/anchor';
+export declare function getCofiAccount(cofiSolanaConfig: CofiSolanaConfig, publicKey: web3.PublicKey): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
     name: "cofiAccount";
     type: {
         kind: "struct";
@@ -116,4 +115,4 @@ export declare function getCofiAccount(cluster: ClusterType, provider: Provider,
         }];
     };
 }, import("@project-serum/anchor").IdlTypes<cofi.Cofi>>>;
-export declare function getAssociatedCofiAccountAddress(cluster: ClusterType, owner: web3.PublicKey): Promise<web3.PublicKey>;
+export declare function getAssociatedCofiAccountAddress(cofiSolanaConfig: CofiSolanaConfig, owner: web3.PublicKey): Promise<web3.PublicKey>;
