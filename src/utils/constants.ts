@@ -121,7 +121,6 @@ export const ACCOUNTS = {
       case "mainnet":
         throw new Error("MAINNET NOT READY YET")
     }
-    return DEVNET_COFI_SOL
   },
   COFI_STRATEGY_PROGRAM_ID: (cluster: ClusterType): web3.PublicKey=>{
     switch(cluster) {
@@ -152,5 +151,5 @@ export const ACCOUNTS = {
         (await ACCOUNTS.COFI_MINT(version, cluster)).toBuffer(), 
         ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer()],
         ACCOUNTS.COFI_PROGRAM_ID(cluster),))[0];
-  }
+  },
 }

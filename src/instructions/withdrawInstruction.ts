@@ -9,7 +9,6 @@ export async function withdrawInstruction(
   cofiAccountAuthority: web3.PublicKey,
   sourceCofiAccount: web3.PublicKey,
   destinationLiquidityAccount: web3.PublicKey,
-  feeReceiverAccount: web3.PublicKey,
   amount: BN,
 ): Promise<web3.TransactionInstruction> {
   const cofiProgram = 
@@ -19,6 +18,7 @@ export async function withdrawInstruction(
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
   const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
+  const feeReceiverAccount = ACCOUNTS.COFI_FEE_RECEIVER(cluster);
 
   return await cofiProgram.methods.withdraw(amount)
     .accounts({

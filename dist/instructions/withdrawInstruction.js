@@ -13,13 +13,14 @@ exports.withdrawInstruction = void 0;
 const constants_1 = require("../utils/constants");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function withdrawInstruction(version, cluster, provider, cofiAccountAuthority, sourceCofiAccount, destinationLiquidityAccount, feeReceiverAccount, amount) {
+function withdrawInstruction(version, cluster, provider, cofiAccountAuthority, sourceCofiAccount, destinationLiquidityAccount, amount) {
     return __awaiter(this, void 0, void 0, function* () {
         const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, constants_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         const tokenProgram = anchor_1.Spl.token();
         const cofiMint = yield constants_1.ACCOUNTS.COFI_MINT(version, cluster);
         const strategy = yield constants_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
         const collateralReserve = yield constants_1.ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
+        const feeReceiverAccount = constants_1.ACCOUNTS.COFI_FEE_RECEIVER(cluster);
         return yield cofiProgram.methods.withdraw(amount)
             .accounts({
             cofiAccountAuthority,

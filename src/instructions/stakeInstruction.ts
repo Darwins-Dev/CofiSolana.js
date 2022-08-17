@@ -9,7 +9,6 @@ export async function stakeInstruction(
   stakerAuthority: web3.PublicKey,
   staker: web3.PublicKey,
   beneficiary: web3.PublicKey,
-  feeReceiverAccount: web3.PublicKey,
   amount: BN,
 ): Promise<web3.TransactionInstruction> {
   const cofiProgram = 
@@ -20,6 +19,7 @@ export async function stakeInstruction(
 
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
+  const feeReceiverAccount = ACCOUNTS.COFI_FEE_RECEIVER(cluster);
 
   return await cofiProgram.methods.stake(amount)
     .accounts({

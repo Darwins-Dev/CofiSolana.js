@@ -121,7 +121,6 @@ exports.ACCOUNTS = {
             case "mainnet":
                 throw new Error("MAINNET NOT READY YET");
         }
-        return exports.DEVNET_COFI_SOL;
     },
     COFI_STRATEGY_PROGRAM_ID: (cluster) => {
         switch (cluster) {
@@ -147,5 +146,5 @@ exports.ACCOUNTS = {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_collateral_reserve', 'utf-8'),
             (yield exports.ACCOUNTS.COFI_MINT(version, cluster)).toBuffer(),
             exports.ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
-    })
+    }),
 };
