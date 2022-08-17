@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./utils"), exports);
 __exportStar(require("./instructions"), exports);
 __exportStar(require("./account"), exports);
+__exportStar(require("./types"), exports);
