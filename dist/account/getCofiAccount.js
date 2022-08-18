@@ -39,9 +39,11 @@ function getWithdrawableLiquidity(cofiSolanaConfig, cofiAccountPublicKey, withdr
             return (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount);
         }
         else {
-            let interestGenerated = yield getInterestGenerated(cofiSolanaConfig, cofiAccountPublicKey);
+            let depositNstakes = cofiAccount.depositAmount.add(cofiAccount.stakeAmount);
+            let sharesAsLiquidity = yield (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount);
+            let interestGenerated = (sharesAsLiquidity.gt(depositNstakes)) ? sharesAsLiquidity.sub(depositNstakes) : new anchor_1.BN(0);
             let withdrawFee = interestGenerated.mul(new anchor_1.BN(withdrawFeeRate)).div(new anchor_1.BN(1000000));
-            return withdrawFee;
+            return sharesAsLiquidity.sub(cofiAccount.stakeAmount).sub(withdrawFee);
         }
     });
 }
@@ -50,8 +52,12 @@ function getInterestGenerated(cofiSolanaConfig, cofiAccountPublicKey) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         let cofiAccount = yield getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
-        return (yield (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount))
-            .sub(cofiAccount.depositAmount);
+        let depositNstakes = cofiAccount.depositAmount.add(cofiAccount.stakeAmount);
+        let sharesAsLiquidity = yield (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount);
+        if (sharesAsLiquidity.gt(depositNstakes))
+            return sharesAsLiquidity.sub(depositNstakes);
+        else
+            return new anchor_1.BN(0);
     });
 }
 exports.getInterestGenerated = getInterestGenerated;
