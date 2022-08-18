@@ -16,7 +16,7 @@ function getAssociatedLiquidityAccount(cofiSolanaConfig, owner) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         let liquidityMint = yield address_1.ACCOUNTS.LIQUIDITY_MINT(cluster);
-        return (0, spl_token_1.getAssociatedTokenAddress)(liquidityMint, owner).then((address) => { (0, spl_token_1.getAccount)(provider.connection, address); });
+        return (0, spl_token_1.getAssociatedTokenAddress)(liquidityMint, owner).then((address) => (0, spl_token_1.getAccount)(provider.connection, address));
     });
 }
 exports.getAssociatedLiquidityAccount = getAssociatedLiquidityAccount;
