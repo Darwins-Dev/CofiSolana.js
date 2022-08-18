@@ -9,10 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAssociatedCofiAccountAddress = exports.getCofiAccount = void 0;
+exports.getInterestGenerated = exports.getWithdrawableLiquidity = exports.getAssociatedCofiAccountAddress = exports.getCofiAccount = void 0;
 const address_1 = require("../utils/address");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
+const __1 = require("..");
 function getCofiAccount(cofiSolanaConfig, publicKey) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
@@ -30,3 +31,27 @@ function getAssociatedCofiAccountAddress(cofiSolanaConfig, owner) {
     });
 }
 exports.getAssociatedCofiAccountAddress = getAssociatedCofiAccountAddress;
+function getWithdrawableLiquidity(cofiSolanaConfig, cofiAccountPublicKey, withdrawFeeRate) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { version, cluster, provider } = cofiSolanaConfig;
+        let cofiAccount = yield getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
+        if (cofiAccountPublicKey.equals(address_1.ACCOUNTS.COFI_FEE_RECEIVER(cluster))) {
+            return (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount);
+        }
+        else {
+            let interestGenerated = yield getInterestGenerated(cofiSolanaConfig, cofiAccountPublicKey);
+            let withdrawFee = interestGenerated.mul(new anchor_1.BN(withdrawFeeRate)).div(new anchor_1.BN(1000000));
+            return withdrawFee;
+        }
+    });
+}
+exports.getWithdrawableLiquidity = getWithdrawableLiquidity;
+function getInterestGenerated(cofiSolanaConfig, cofiAccountPublicKey) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { version, cluster, provider } = cofiSolanaConfig;
+        let cofiAccount = yield getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
+        return (yield (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount))
+            .sub(cofiAccount.depositAmount);
+    });
+}
+exports.getInterestGenerated = getInterestGenerated;

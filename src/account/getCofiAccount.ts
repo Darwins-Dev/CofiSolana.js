@@ -1,6 +1,7 @@
 import { ACCOUNTS, } from '../utils/address';
 import { cofi, CofiSolanaConfig } from '../types';
-import { web3, Program, Provider } from '@project-serum/anchor';
+import { web3, Program, BN, } from '@project-serum/anchor';
+import { sharesToLiquidity } from '..';
 
 export async function getCofiAccount(
   cofiSolanaConfig: CofiSolanaConfig,
@@ -25,4 +26,36 @@ export async function getAssociatedCofiAccountAddress(
       Buffer.from('cofi_account', 'utf-8'), owner.toBuffer(),
     ], ACCOUNTS.COFI_PROGRAM_ID(cluster)
   ))[0]
+}
+
+export async function getWithdrawableLiquidity(
+  cofiSolanaConfig: CofiSolanaConfig,
+  cofiAccountPublicKey: web3.PublicKey,
+  withdrawFeeRate: BN | number | string,  /// in ppm
+): Promise<BN> {
+  const {
+    version, cluster, provider
+  } = cofiSolanaConfig;
+  let cofiAccount = await getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
+  if(cofiAccountPublicKey.equals(ACCOUNTS.COFI_FEE_RECEIVER(cluster))) {
+    return sharesToLiquidity(cofiSolanaConfig, cofiAccount.shareAmount)
+  } else {
+    let interestGenerated = await getInterestGenerated(
+      cofiSolanaConfig, cofiAccountPublicKey,
+    );
+    let withdrawFee = interestGenerated.mul(new BN(withdrawFeeRate)).div(new BN(1000000));
+    return withdrawFee
+  }
+}
+
+export async function getInterestGenerated(
+  cofiSolanaConfig: CofiSolanaConfig,
+  cofiAccountPublicKey: web3.PublicKey,
+): Promise<BN> {
+  const {
+    version, cluster, provider
+  } = cofiSolanaConfig;
+  let cofiAccount = await getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
+  return (await sharesToLiquidity(cofiSolanaConfig, cofiAccount.shareAmount))
+    .sub(cofiAccount.depositAmount)
 }

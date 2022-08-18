@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initCofiStake = void 0;
+exports.initCofiStakeInstruction = void 0;
 const address_1 = require("../utils/address");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function initCofiStake(cofiSolanaConfig, payer, staker, beneficiary) {
+function initCofiStakeInstruction(cofiSolanaConfig, payer, staker, beneficiary) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
@@ -30,4 +30,4 @@ function initCofiStake(cofiSolanaConfig, payer, staker, beneficiary) {
         }).instruction();
     });
 }
-exports.initCofiStake = initCofiStake;
+exports.initCofiStakeInstruction = initCofiStakeInstruction;

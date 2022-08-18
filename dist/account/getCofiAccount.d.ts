@@ -1,5 +1,5 @@
 import { cofi, CofiSolanaConfig } from '../types';
-import { web3 } from '@project-serum/anchor';
+import { web3, BN } from '@project-serum/anchor';
 export declare function getCofiAccount(cofiSolanaConfig: CofiSolanaConfig, publicKey: web3.PublicKey): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
     name: "cofiAccount";
     type: {
@@ -116,3 +116,5 @@ export declare function getCofiAccount(cofiSolanaConfig: CofiSolanaConfig, publi
     };
 }, import("@project-serum/anchor").IdlTypes<cofi.Cofi>>>;
 export declare function getAssociatedCofiAccountAddress(cofiSolanaConfig: CofiSolanaConfig, owner: web3.PublicKey): Promise<web3.PublicKey>;
+export declare function getWithdrawableLiquidity(cofiSolanaConfig: CofiSolanaConfig, cofiAccountPublicKey: web3.PublicKey, withdrawFeeRate: BN | number | string): Promise<BN>;
+export declare function getInterestGenerated(cofiSolanaConfig: CofiSolanaConfig, cofiAccountPublicKey: web3.PublicKey): Promise<BN>;

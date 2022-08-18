@@ -2,7 +2,7 @@ import { ACCOUNTS, } from '../utils/address';
 import { cofi, CofiSolanaConfig } from '../types';
 import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/anchor';
 
-export async function initCofiStake(
+export async function initCofiStakeInstruction(
   cofiSolanaConfig: CofiSolanaConfig,
   payer: web3.PublicKey,
   staker: web3.PublicKey,
