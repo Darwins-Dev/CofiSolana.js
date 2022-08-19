@@ -771,16 +771,31 @@ export type Cofi = {
   ],
   "events": [
     {
-      "name": "MyEvent",
+      "name": "DepositEvent",
       "fields": [
         {
-          "name": "someValue",
+          "name": "amount",
           "type": "u64",
           "index": false
         },
         {
-          "name": "anotherValue",
-          "type": "u128",
+          "name": "destinationAccount",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "StakeEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "stakePair",
+          "type": "publicKey",
           "index": false
         }
       ]
@@ -1623,16 +1638,31 @@ export const IDL: Cofi = {
   ],
   "events": [
     {
-      "name": "MyEvent",
+      "name": "DepositEvent",
       "fields": [
         {
-          "name": "someValue",
+          "name": "amount",
           "type": "u64",
           "index": false
         },
         {
-          "name": "anotherValue",
-          "type": "u128",
+          "name": "destinationAccount",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "StakeEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "stakePair",
+          "type": "publicKey",
           "index": false
         }
       ]
