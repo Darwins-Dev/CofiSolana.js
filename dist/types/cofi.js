@@ -774,11 +774,46 @@ exports.IDL = {
     ],
     "events": [
         {
+            "name": "InitCofiAccountEvent",
+            "fields": [
+                {
+                    "name": "publicKey",
+                    "type": "publicKey",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "InitStakeAccountEvent",
+            "fields": [
+                {
+                    "name": "publicKey",
+                    "type": "publicKey",
+                    "index": false
+                }
+            ]
+        },
+        {
             "name": "DepositEvent",
             "fields": [
                 {
                     "name": "amount",
                     "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "destinationAccount",
+                    "type": "publicKey",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "MergeAccountEvent",
+            "fields": [
+                {
+                    "name": "sourceAccount",
+                    "type": "publicKey",
                     "index": false
                 },
                 {
@@ -798,6 +833,36 @@ exports.IDL = {
                 },
                 {
                     "name": "stakePair",
+                    "type": "publicKey",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "UnstakeEvent",
+            "fields": [
+                {
+                    "name": "amount",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "stakePair",
+                    "type": "publicKey",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "WithdrawEvent",
+            "fields": [
+                {
+                    "name": "amount",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "sourceAccount",
                     "type": "publicKey",
                     "index": false
                 }
