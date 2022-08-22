@@ -16,7 +16,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./initCofiAccountInstruction"), exports);
 __exportStar(require("./initAssociatedCofiAccountInstruction"), exports);
-__exportStar(require("./initStakeAccount"), exports);
+__exportStar(require("./initStakeAccountInstruction"), exports);
 __exportStar(require("./depositInstruction"), exports);
 __exportStar(require("./withdrawInstruction"), exports);
 __exportStar(require("./stakeInstruction"), exports);
