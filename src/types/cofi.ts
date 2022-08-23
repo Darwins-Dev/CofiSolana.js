@@ -101,7 +101,7 @@ export type Cofi = {
           "isSigner": true
         },
         {
-          "name": "owner",
+          "name": "authority",
           "isMut": false,
           "isSigner": true
         },
@@ -127,47 +127,6 @@ export type Cofi = {
         }
       ],
       "args": []
-    },
-    {
-      "name": "initCofiTimedAcc",
-      "accounts": [
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "owner",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "account",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "mint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "expiration",
-          "type": "i64"
-        }
-      ]
     },
     {
       "name": "initCofiStake",
@@ -217,7 +176,7 @@ export type Cofi = {
           "isSigner": true
         },
         {
-          "name": "owner",
+          "name": "authority",
           "isMut": false,
           "isSigner": true
         },
@@ -596,12 +555,12 @@ export type Cofi = {
             "type": "publicKey"
           },
           {
-            "name": "owner",
+            "name": "authority",
             "type": "publicKey"
           },
           {
-            "name": "expiration",
-            "type": "i64"
+            "name": "isLocked",
+            "type": "bool"
           },
           {
             "name": "extraSpace",
@@ -926,6 +885,11 @@ export type Cofi = {
       "code": 6011,
       "name": "LockedTimedStake",
       "msg": "locked time stake"
+    },
+    {
+      "code": 6012,
+      "name": "TimedAccountStaker",
+      "msg": "cannot stake with timed cofi account"
     }
   ]
 };
@@ -1033,7 +997,7 @@ export const IDL: Cofi = {
           "isSigner": true
         },
         {
-          "name": "owner",
+          "name": "authority",
           "isMut": false,
           "isSigner": true
         },
@@ -1059,47 +1023,6 @@ export const IDL: Cofi = {
         }
       ],
       "args": []
-    },
-    {
-      "name": "initCofiTimedAcc",
-      "accounts": [
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "owner",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "account",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "mint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "expiration",
-          "type": "i64"
-        }
-      ]
     },
     {
       "name": "initCofiStake",
@@ -1149,7 +1072,7 @@ export const IDL: Cofi = {
           "isSigner": true
         },
         {
-          "name": "owner",
+          "name": "authority",
           "isMut": false,
           "isSigner": true
         },
@@ -1528,12 +1451,12 @@ export const IDL: Cofi = {
             "type": "publicKey"
           },
           {
-            "name": "owner",
+            "name": "authority",
             "type": "publicKey"
           },
           {
-            "name": "expiration",
-            "type": "i64"
+            "name": "isLocked",
+            "type": "bool"
           },
           {
             "name": "extraSpace",
@@ -1858,6 +1781,11 @@ export const IDL: Cofi = {
       "code": 6011,
       "name": "LockedTimedStake",
       "msg": "locked time stake"
+    },
+    {
+      "code": 6012,
+      "name": "TimedAccountStaker",
+      "msg": "cannot stake with timed cofi account"
     }
   ]
 };

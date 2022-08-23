@@ -5,7 +5,7 @@ import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/ancho
 export async function initAssociatedCofiAccountInstruction(
   cofiSolanaConfig: CofiSolanaConfig,
   payer: web3.PublicKey,
-  owner: web3.PublicKey,
+  authority: web3.PublicKey,
 ): Promise<web3.TransactionInstruction> {
   const {
     version, cluster, provider
@@ -14,14 +14,14 @@ export async function initAssociatedCofiAccountInstruction(
     new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
   const [associatedCofiAccountAddress,] = await web3.PublicKey.findProgramAddress(
-    [Buffer.from('cofi_account','utf-8'), owner.toBuffer(),],
+    [Buffer.from('cofi_account','utf-8'), authority.toBuffer(),],
     cofiProgram.programId,
   );
 
   return await cofiProgram.methods.initAssociatedCofiAcc()
     .accounts({
       initializer: payer,
-      owner,
+      authority,
       mint: cofiMint,
       account: associatedCofiAccountAddress,
       systemProgram: web3.SystemProgram.programId,

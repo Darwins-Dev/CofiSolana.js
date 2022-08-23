@@ -5,7 +5,7 @@ import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/ancho
 export async function initCofiAccountInstruction(
   cofiSolanaConfig: CofiSolanaConfig,
   payer: web3.PublicKey,
-  owner: web3.PublicKey,
+  authority: web3.PublicKey,
   account: web3.PublicKey,
 ): Promise<web3.TransactionInstruction> {
   const {
@@ -18,7 +18,7 @@ export async function initCofiAccountInstruction(
   return await cofiProgram.methods.initCofiAcc()
     .accounts({
       initializer: payer,
-      owner,
+      authority,
       account,
       mint: cofiMint,
       systemProgram: web3.SystemProgram.programId,

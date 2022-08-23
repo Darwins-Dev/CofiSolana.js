@@ -20,11 +20,11 @@ export declare function getCofiMintAccount(cofiSolanaConfig: CofiSolanaConfig): 
             name: "mint";
             type: "publicKey";
         }, {
-            name: "owner";
+            name: "authority";
             type: "publicKey";
         }, {
-            name: "expiration";
-            type: "i64";
+            name: "isLocked";
+            type: "bool";
         }, {
             name: "extraSpace";
             type: {

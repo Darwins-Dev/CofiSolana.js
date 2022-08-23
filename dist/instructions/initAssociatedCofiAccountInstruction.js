@@ -13,16 +13,16 @@ exports.initAssociatedCofiAccountInstruction = void 0;
 const address_1 = require("../utils/address");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
-function initAssociatedCofiAccountInstruction(cofiSolanaConfig, payer, owner) {
+function initAssociatedCofiAccountInstruction(cofiSolanaConfig, payer, authority) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
-        const [associatedCofiAccountAddress,] = yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_account', 'utf-8'), owner.toBuffer(),], cofiProgram.programId);
+        const [associatedCofiAccountAddress,] = yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_account', 'utf-8'), authority.toBuffer(),], cofiProgram.programId);
         return yield cofiProgram.methods.initAssociatedCofiAcc()
             .accounts({
             initializer: payer,
-            owner,
+            authority,
             mint: cofiMint,
             account: associatedCofiAccountAddress,
             systemProgram: anchor_1.web3.SystemProgram.programId,

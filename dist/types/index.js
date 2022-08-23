@@ -23,6 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cofiStrategy = exports.cofi = void 0;
+exports.cofiTimer = exports.cofiStrategy = exports.cofi = void 0;
 exports.cofi = __importStar(require("./cofi"));
 exports.cofiStrategy = __importStar(require("./cofi_strategy"));
+exports.cofiTimer = __importStar(require("./cofi_timer"));

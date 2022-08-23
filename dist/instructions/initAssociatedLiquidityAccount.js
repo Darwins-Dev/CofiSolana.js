@@ -9,24 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initCofiAccountInstruction = void 0;
+exports.initAssociatedCofiAccountInstruction = void 0;
 const address_1 = require("../utils/address");
-const types_1 = require("../types");
-const anchor_1 = require("@project-serum/anchor");
-function initCofiAccountInstruction(cofiSolanaConfig, payer, authority, account) {
+const spl_token_1 = require("@solana/spl-token");
+function initAssociatedCofiAccountInstruction(cofiSolanaConfig, payer, authority) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
-        const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
-        return yield cofiProgram.methods.initCofiAcc()
-            .accounts({
-            initializer: payer,
-            authority,
-            account,
-            mint: cofiMint,
-            systemProgram: anchor_1.web3.SystemProgram.programId,
-            rent: anchor_1.web3.SYSVAR_RENT_PUBKEY,
-        }).instruction();
+        let liquidityMint = yield address_1.ACCOUNTS.LIQUIDITY_MINT(cluster);
+        return (0, spl_token_1.createAssociatedTokenAccountInstruction)(payer, yield (0, spl_token_1.getAssociatedTokenAddress)(liquidityMint, authority), authority, liquidityMint);
     });
 }
-exports.initCofiAccountInstruction = initCofiAccountInstruction;
+exports.initAssociatedCofiAccountInstruction = initAssociatedCofiAccountInstruction;
