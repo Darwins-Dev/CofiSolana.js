@@ -6,3 +6,4 @@ export * from './withdrawInstruction';
 export * from './stakeInstruction';
 export * from './unstakeInstruction';
 export * from './mergeAccountsInstruction';
+export * from './initAssociatedLiquidityAccount';

@@ -3,7 +3,7 @@ import { cofi, CofiSolanaConfig } from '../types';
 import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/anchor';
 import {createAssociatedTokenAccountInstruction, ASSOCIATED_TOKEN_PROGRAM_ID, getAssociatedTokenAddress} from '@solana/spl-token';
 
-export async function initAssociatedCofiAccountInstruction(
+export async function initAssociatedLiquidityAccount(
   cofiSolanaConfig: CofiSolanaConfig,
   payer: web3.PublicKey,
   authority: web3.PublicKey,

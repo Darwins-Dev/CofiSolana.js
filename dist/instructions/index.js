@@ -22,3 +22,4 @@ __exportStar(require("./withdrawInstruction"), exports);
 __exportStar(require("./stakeInstruction"), exports);
 __exportStar(require("./unstakeInstruction"), exports);
 __exportStar(require("./mergeAccountsInstruction"), exports);
+__exportStar(require("./initAssociatedLiquidityAccount"), exports);

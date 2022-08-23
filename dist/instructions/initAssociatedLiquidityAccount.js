@@ -9,14 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initAssociatedCofiAccountInstruction = void 0;
+exports.initAssociatedLiquidityAccount = void 0;
 const address_1 = require("../utils/address");
 const spl_token_1 = require("@solana/spl-token");
-function initAssociatedCofiAccountInstruction(cofiSolanaConfig, payer, authority) {
+function initAssociatedLiquidityAccount(cofiSolanaConfig, payer, authority) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         let liquidityMint = yield address_1.ACCOUNTS.LIQUIDITY_MINT(cluster);
         return (0, spl_token_1.createAssociatedTokenAccountInstruction)(payer, yield (0, spl_token_1.getAssociatedTokenAddress)(liquidityMint, authority), authority, liquidityMint);
     });
 }
-exports.initAssociatedCofiAccountInstruction = initAssociatedCofiAccountInstruction;
+exports.initAssociatedLiquidityAccount = initAssociatedLiquidityAccount;
