@@ -23,9 +23,6 @@ export declare function getStakeAccount(cofiSolanaConfig: CofiSolanaConfig, publ
             name: "authority";
             type: "publicKey";
         }, {
-            name: "isLocked";
-            type: "bool";
-        }, {
             name: "extraSpace";
             type: {
                 array: ["u8", 512];
@@ -105,8 +102,11 @@ export declare function getStakeAccount(cofiSolanaConfig: CofiSolanaConfig, publ
             name: "staker";
             type: "publicKey";
         }, {
-            name: "recipient";
+            name: "beneficiary";
             type: "publicKey";
+        }, {
+            name: "isLocked";
+            type: "bool";
         }, {
             name: "extraSpace";
             type: {

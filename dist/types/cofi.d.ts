@@ -447,6 +447,42 @@ export declare type Cofi = {
             "args": [];
         },
         {
+            "name": "stakeLockSwitch";
+            "accounts": [
+                {
+                    "name": "stakerAccountAuthority";
+                    "isMut": false;
+                    "isSigner": true;
+                },
+                {
+                    "name": "beneficiaryAccountAuthority";
+                    "isMut": false;
+                    "isSigner": true;
+                },
+                {
+                    "name": "stakerCofiAccount";
+                    "isMut": false;
+                    "isSigner": false;
+                },
+                {
+                    "name": "beneficiaryCofiAccount";
+                    "isMut": false;
+                    "isSigner": false;
+                },
+                {
+                    "name": "cofiStakePair";
+                    "isMut": true;
+                    "isSigner": false;
+                },
+                {
+                    "name": "cofiMint";
+                    "isMut": false;
+                    "isSigner": false;
+                }
+            ];
+            "args": [];
+        },
+        {
             "name": "pauseOrUnpause";
             "docs": [
                 "authority only interactions"
@@ -557,10 +593,6 @@ export declare type Cofi = {
                     {
                         "name": "authority";
                         "type": "publicKey";
-                    },
-                    {
-                        "name": "isLocked";
-                        "type": "bool";
                     },
                     {
                         "name": "extraSpace";
@@ -690,8 +722,12 @@ export declare type Cofi = {
                         "type": "publicKey";
                     },
                     {
-                        "name": "recipient";
+                        "name": "beneficiary";
                         "type": "publicKey";
+                    },
+                    {
+                        "name": "isLocked";
+                        "type": "bool";
                     },
                     {
                         "name": "extraSpace";

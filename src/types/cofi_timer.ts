@@ -3,7 +3,7 @@ export type CofiTimer = {
   "name": "cofi_timer",
   "instructions": [
     {
-      "name": "initTimedStake",
+      "name": "initTimerOwnedAccount",
       "accounts": [
         {
           "name": "initializer",
@@ -21,17 +21,12 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "recipient",
+          "name": "beneficiary",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "timedCofiAccount",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "timedCofiStakePair",
           "isMut": true,
           "isSigner": true
         },
@@ -46,7 +41,7 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "cofi",
+          "name": "cofiProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -67,6 +62,139 @@ export type CofiTimer = {
           "type": "i64"
         }
       ]
+    },
+    {
+      "name": "stakeAndLock",
+      "accounts": [
+        {
+          "name": "stakerAccountAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "cofiTimer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakerCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "timedCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "timedCofiStakePair",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cofiMint",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "required accounts for staking"
+          ]
+        },
+        {
+          "name": "cofiStrategy",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "feeReceiverAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cofiProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cofiStrategyProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "clock",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "unlockUnstakeMerge",
+      "accounts": [
+        {
+          "name": "stakerAccountAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "cofiTimer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakerCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "beneficiaryCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "timedCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "timedCofiStakePair",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cofiMint",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "required accounts for unstaking"
+          ]
+        },
+        {
+          "name": "cofiStrategy",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cofiProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cofiStrategyProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "clock",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -80,7 +208,7 @@ export type CofiTimer = {
             "type": "publicKey"
           },
           {
-            "name": "recipientAccount",
+            "name": "beneficiaryAccount",
             "type": "publicKey"
           },
           {
@@ -115,7 +243,7 @@ export const IDL: CofiTimer = {
   "name": "cofi_timer",
   "instructions": [
     {
-      "name": "initTimedStake",
+      "name": "initTimerOwnedAccount",
       "accounts": [
         {
           "name": "initializer",
@@ -133,17 +261,12 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "recipient",
+          "name": "beneficiary",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "timedCofiAccount",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "timedCofiStakePair",
           "isMut": true,
           "isSigner": true
         },
@@ -158,7 +281,7 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "cofi",
+          "name": "cofiProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -179,6 +302,139 @@ export const IDL: CofiTimer = {
           "type": "i64"
         }
       ]
+    },
+    {
+      "name": "stakeAndLock",
+      "accounts": [
+        {
+          "name": "stakerAccountAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "cofiTimer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakerCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "timedCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "timedCofiStakePair",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cofiMint",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "required accounts for staking"
+          ]
+        },
+        {
+          "name": "cofiStrategy",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "feeReceiverAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cofiProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cofiStrategyProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "clock",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "unlockUnstakeMerge",
+      "accounts": [
+        {
+          "name": "stakerAccountAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "cofiTimer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakerCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "beneficiaryCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "timedCofiAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "timedCofiStakePair",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cofiMint",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "required accounts for unstaking"
+          ]
+        },
+        {
+          "name": "cofiStrategy",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cofiProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cofiStrategyProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "clock",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -192,7 +448,7 @@ export const IDL: CofiTimer = {
             "type": "publicKey"
           },
           {
-            "name": "recipientAccount",
+            "name": "beneficiaryAccount",
             "type": "publicKey"
           },
           {
