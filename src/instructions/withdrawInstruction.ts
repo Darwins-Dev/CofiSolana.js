@@ -1,6 +1,7 @@
 import { ACCOUNTS, } from '../utils/address';
 import { cofi, CofiSolanaConfig } from '../types';
 import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/anchor';
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 export async function withdrawInstruction(
   cofiSolanaConfig: CofiSolanaConfig,
@@ -14,7 +15,6 @@ export async function withdrawInstruction(
   } = cofiSolanaConfig;
   const cofiProgram = 
     new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-  const tokenProgram: Program<SplToken> = Spl.token();
 
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
@@ -65,7 +65,7 @@ export async function withdrawInstruction(
       isSigner: false,
       isWritable: false,
     },{
-      pubkey: tokenProgram.programId,
+      pubkey: TOKEN_PROGRAM_ID,
       isSigner: false,
       isWritable: false,
     },]).instruction();

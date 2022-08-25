@@ -33,6 +33,7 @@ export const DEVNET_COFI_STRATEGY_SOL = new web3.PublicKey("9MKNtecXPBb6WxF36fhD
 
 export const DEVNET_COFI_SIMP = new web3.PublicKey("BLG2ZfiVKRWtcy1aqAjeUFabRtkRA7y7HsBmodfyh6gh");
 export const DEVNET_COFI_STRATEGY_SIMP = new web3.PublicKey("Gp3ppaJZbbtJtBGBNbKbyZSjibKXmDZj1MRb2PUN3xai");
+export const DEVNET_COFI_TIMER_SIMP = new web3.PublicKey("6xq3zBK3EkLBBp9hZS8vJUX8CyZoe3DwN399e2Uv2trv");
 
 export const DEVNET_COFI_SIMP_FEE_RECEIVER = new web3.PublicKey("FXccWBWFZ6HxoaYgVmb6PPPLQ7UhEsMMEi3gHHZDKBTG");
 
@@ -117,6 +118,15 @@ export const ACCOUNTS = {
         return DEVNET_COFI_SOL
       case "simp":
         return DEVNET_COFI_SIMP
+      case "mainnet":
+        throw new Error("MAINNET NOT READY YET")
+    }
+  },
+  COFI_TIMER_ID: (cluster: ClusterType): web3.PublicKey=>{
+    switch(cluster) {
+      case "devnet":
+      case "simp":
+        return DEVNET_COFI_TIMER_SIMP
       case "mainnet":
         throw new Error("MAINNET NOT READY YET")
     }

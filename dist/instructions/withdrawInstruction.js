@@ -13,11 +13,11 @@ exports.withdrawInstruction = void 0;
 const address_1 = require("../utils/address");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
+const spl_token_1 = require("@solana/spl-token");
 function withdrawInstruction(cofiSolanaConfig, cofiAccountAuthority, sourceCofiAccount, destinationLiquidityAccount, amount) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-        const tokenProgram = anchor_1.Spl.token();
         const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
         const strategy = yield address_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
         const collateralReserve = yield address_1.ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
@@ -66,7 +66,7 @@ function withdrawInstruction(cofiSolanaConfig, cofiAccountAuthority, sourceCofiA
                 isSigner: false,
                 isWritable: false,
             }, {
-                pubkey: tokenProgram.programId,
+                pubkey: spl_token_1.TOKEN_PROGRAM_ID,
                 isSigner: false,
                 isWritable: false,
             },]).instruction();
