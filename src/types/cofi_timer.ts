@@ -4,6 +4,9 @@ export type CofiTimer = {
   "instructions": [
     {
       "name": "initTimerOwnedAccount",
+      "docs": [
+        "initializes timer and timer_owned_account"
+      ],
       "accounts": [
         {
           "name": "initializer",
@@ -26,7 +29,7 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timedCofiAccount",
+          "name": "timerCofiAccount",
           "isMut": true,
           "isSigner": true
         },
@@ -65,6 +68,9 @@ export type CofiTimer = {
     },
     {
       "name": "stakeAndLock",
+      "docs": [
+        "stakes into timer_owned_account and locks stake account"
+      ],
       "accounts": [
         {
           "name": "stakerAccountAuthority",
@@ -82,12 +88,12 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timedCofiAccount",
+          "name": "timerCofiAccount",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "timedCofiStakePair",
+          "name": "timerCofiStakePair",
           "isMut": true,
           "isSigner": false
         },
@@ -134,6 +140,9 @@ export type CofiTimer = {
     },
     {
       "name": "unlockUnstakeMerge",
+      "docs": [
+        "unlocks stake account, unstakes from timer_owned_account, and merges timer_owned_account with beneficiary"
+      ],
       "accounts": [
         {
           "name": "stakerAccountAuthority",
@@ -156,12 +165,12 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timedCofiAccount",
+          "name": "timerCofiAccount",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "timedCofiStakePair",
+          "name": "timerCofiStakePair",
           "isMut": true,
           "isSigner": false
         },
@@ -244,6 +253,9 @@ export const IDL: CofiTimer = {
   "instructions": [
     {
       "name": "initTimerOwnedAccount",
+      "docs": [
+        "initializes timer and timer_owned_account"
+      ],
       "accounts": [
         {
           "name": "initializer",
@@ -266,7 +278,7 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timedCofiAccount",
+          "name": "timerCofiAccount",
           "isMut": true,
           "isSigner": true
         },
@@ -305,6 +317,9 @@ export const IDL: CofiTimer = {
     },
     {
       "name": "stakeAndLock",
+      "docs": [
+        "stakes into timer_owned_account and locks stake account"
+      ],
       "accounts": [
         {
           "name": "stakerAccountAuthority",
@@ -322,12 +337,12 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timedCofiAccount",
+          "name": "timerCofiAccount",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "timedCofiStakePair",
+          "name": "timerCofiStakePair",
           "isMut": true,
           "isSigner": false
         },
@@ -374,6 +389,9 @@ export const IDL: CofiTimer = {
     },
     {
       "name": "unlockUnstakeMerge",
+      "docs": [
+        "unlocks stake account, unstakes from timer_owned_account, and merges timer_owned_account with beneficiary"
+      ],
       "accounts": [
         {
           "name": "stakerAccountAuthority",
@@ -396,12 +414,12 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timedCofiAccount",
+          "name": "timerCofiAccount",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "timedCofiStakePair",
+          "name": "timerCofiStakePair",
           "isMut": true,
           "isSigner": false
         },

@@ -1,3 +1,4 @@
+/// main program instructions
 export * from './initCofiAccountInstruction';
 export * from './initAssociatedCofiAccountInstruction';
 export * from './initStakeAccountInstruction';
@@ -6,4 +7,8 @@ export * from './withdrawInstruction';
 export * from './stakeInstruction';
 export * from './unstakeInstruction';
 export * from './mergeAccountsInstruction';
+/// token program instructions
 export * from './initAssociatedLiquidityAccount';
+/// cofi timer instructions
+export * from './timerStakeAndLock';
+export * from './initTimerOwnedAccount';
