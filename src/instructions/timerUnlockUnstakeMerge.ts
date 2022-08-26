@@ -2,7 +2,7 @@ import { ACCOUNTS, } from '../utils/address';
 import { cofi, cofiStrategy, cofiTimer, CofiSolanaConfig } from '../types';
 import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/anchor';
 
-export async function timerStakeAndLock(
+export async function timerUnlockUnstakeMerge(
   cofiSolanaConfig: CofiSolanaConfig,
   stakerAuthority: web3.PublicKey,
   stakerAccount: web3.PublicKey,

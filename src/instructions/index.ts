@@ -12,3 +12,4 @@ export * from './initAssociatedLiquidityAccount';
 /// cofi timer instructions
 export * from './timerStakeAndLock';
 export * from './initTimerOwnedAccount';
+export * from './timerUnlockUnstakeMerge';
