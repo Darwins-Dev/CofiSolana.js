@@ -29,7 +29,7 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timerCofiAccount",
+          "name": "timerOwnedAccount",
           "isMut": true,
           "isSigner": true
         },
@@ -88,7 +88,7 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timerCofiAccount",
+          "name": "timerOwnedAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -165,7 +165,7 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timerCofiAccount",
+          "name": "timerOwnedAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -221,7 +221,7 @@ export type CofiTimer = {
             "type": "publicKey"
           },
           {
-            "name": "timerCofiAccount",
+            "name": "timerOwnedAccount",
             "type": "publicKey"
           },
           {
@@ -278,7 +278,7 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timerCofiAccount",
+          "name": "timerOwnedAccount",
           "isMut": true,
           "isSigner": true
         },
@@ -337,7 +337,7 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timerCofiAccount",
+          "name": "timerOwnedAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -414,7 +414,7 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "timerCofiAccount",
+          "name": "timerOwnedAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -470,7 +470,7 @@ export const IDL: CofiTimer = {
             "type": "publicKey"
           },
           {
-            "name": "timerCofiAccount",
+            "name": "timerOwnedAccount",
             "type": "publicKey"
           },
           {

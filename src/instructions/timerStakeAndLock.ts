@@ -14,16 +14,16 @@ export async function timerStakeAndLock(
     version, cluster, provider
   } = cofiSolanaConfig;
   const cofiTimerProgram = new Program<cofiTimer.CofiTimer>(cofiTimer.IDL, ACCOUNTS.COFI_TIMER_ID(cluster), provider);
-  let [cofiTimerAccount,] = await web3.PublicKey.findProgramAddress(
+  let [cofiTimerAddress,] = await web3.PublicKey.findProgramAddress(
     [Buffer.from('cofi_timer', 'utf-8'), timerOwnedAccount.toBuffer()],
     cofiTimerProgram.programId,
   );
   return await cofiTimerProgram.methods.stakeAndLock(new BN(amount))
     .accounts({
       stakerAccountAuthority: stakerAuthority,
-      cofiTimer,
+      cofiTimer: cofiTimerAddress,
       stakerCofiAccount: stakerAccount,
-      timerCofiAccount: timerOwnedAccount,
+      timerOwnedAccount,
       timerCofiStakePair: timerCofiStakeAccount,
       cofiMint: await ACCOUNTS.COFI_MINT(version, cluster),
       feeReceiverAccount: ACCOUNTS.COFI_FEE_RECEIVER(cluster),
