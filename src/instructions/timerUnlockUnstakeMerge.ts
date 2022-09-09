@@ -26,8 +26,8 @@ export async function timerUnlockUnstakeMerge(
       timerCofiStakePair: timerCofiStakeAccount,
       cofiMint: await ACCOUNTS.COFI_MINT(version, cluster),
       cofiStrategy: await ACCOUNTS.COFI_STRATEGY(version, cluster),
-      cofiProgram: ACCOUNTS.COFI_PROGRAM_ID,
-      cofiStrategyProgram: ACCOUNTS.COFI_STRATEGY_PROGRAM_ID,
+      cofiProgram: ACCOUNTS.COFI_PROGRAM_ID(cluster),
+      cofiStrategyProgram: ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
       clock: web3.SYSVAR_CLOCK_PUBKEY,
     }).instruction()
 }

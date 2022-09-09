@@ -4,6 +4,9 @@ export declare type CofiTimer = {
     "instructions": [
         {
             "name": "initTimerOwnedAccount";
+            "docs": [
+                "initializes timer and timer_owned_account"
+            ];
             "accounts": [
                 {
                     "name": "initializer";
@@ -26,7 +29,7 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 },
                 {
-                    "name": "timedCofiAccount";
+                    "name": "timerOwnedAccount";
                     "isMut": true;
                     "isSigner": true;
                 },
@@ -65,6 +68,9 @@ export declare type CofiTimer = {
         },
         {
             "name": "stakeAndLock";
+            "docs": [
+                "stakes into timer_owned_account and locks stake account"
+            ];
             "accounts": [
                 {
                     "name": "stakerAccountAuthority";
@@ -82,12 +88,12 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 },
                 {
-                    "name": "timedCofiAccount";
+                    "name": "timerOwnedAccount";
                     "isMut": true;
                     "isSigner": false;
                 },
                 {
-                    "name": "timedCofiStakePair";
+                    "name": "timerCofiStakePair";
                     "isMut": true;
                     "isSigner": false;
                 },
@@ -134,6 +140,9 @@ export declare type CofiTimer = {
         },
         {
             "name": "unlockUnstakeMerge";
+            "docs": [
+                "unlocks stake account, unstakes from timer_owned_account, and merges timer_owned_account with beneficiary"
+            ];
             "accounts": [
                 {
                     "name": "stakerAccountAuthority";
@@ -156,12 +165,12 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 },
                 {
-                    "name": "timedCofiAccount";
+                    "name": "timerOwnedAccount";
                     "isMut": true;
                     "isSigner": false;
                 },
                 {
-                    "name": "timedCofiStakePair";
+                    "name": "timerCofiStakePair";
                     "isMut": true;
                     "isSigner": false;
                 },
@@ -212,7 +221,7 @@ export declare type CofiTimer = {
                         "type": "publicKey";
                     },
                     {
-                        "name": "timerCofiAccount";
+                        "name": "timerOwnedAccount";
                         "type": "publicKey";
                     },
                     {

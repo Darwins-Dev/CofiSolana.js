@@ -7,6 +7,9 @@ exports.IDL = {
     "instructions": [
         {
             "name": "initTimerOwnedAccount",
+            "docs": [
+                "initializes timer and timer_owned_account"
+            ],
             "accounts": [
                 {
                     "name": "initializer",
@@ -29,7 +32,7 @@ exports.IDL = {
                     "isSigner": false
                 },
                 {
-                    "name": "timedCofiAccount",
+                    "name": "timerOwnedAccount",
                     "isMut": true,
                     "isSigner": true
                 },
@@ -68,6 +71,9 @@ exports.IDL = {
         },
         {
             "name": "stakeAndLock",
+            "docs": [
+                "stakes into timer_owned_account and locks stake account"
+            ],
             "accounts": [
                 {
                     "name": "stakerAccountAuthority",
@@ -85,12 +91,12 @@ exports.IDL = {
                     "isSigner": false
                 },
                 {
-                    "name": "timedCofiAccount",
+                    "name": "timerOwnedAccount",
                     "isMut": true,
                     "isSigner": false
                 },
                 {
-                    "name": "timedCofiStakePair",
+                    "name": "timerCofiStakePair",
                     "isMut": true,
                     "isSigner": false
                 },
@@ -137,6 +143,9 @@ exports.IDL = {
         },
         {
             "name": "unlockUnstakeMerge",
+            "docs": [
+                "unlocks stake account, unstakes from timer_owned_account, and merges timer_owned_account with beneficiary"
+            ],
             "accounts": [
                 {
                     "name": "stakerAccountAuthority",
@@ -159,12 +168,12 @@ exports.IDL = {
                     "isSigner": false
                 },
                 {
-                    "name": "timedCofiAccount",
+                    "name": "timerOwnedAccount",
                     "isMut": true,
                     "isSigner": false
                 },
                 {
-                    "name": "timedCofiStakePair",
+                    "name": "timerCofiStakePair",
                     "isMut": true,
                     "isSigner": false
                 },
@@ -215,7 +224,7 @@ exports.IDL = {
                         "type": "publicKey"
                     },
                     {
-                        "name": "timerCofiAccount",
+                        "name": "timerOwnedAccount",
                         "type": "publicKey"
                     },
                     {
