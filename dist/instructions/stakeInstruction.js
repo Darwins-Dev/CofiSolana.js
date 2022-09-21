@@ -23,7 +23,7 @@ function stakeInstruction(cofiSolanaConfig, stakerAuthority, staker, beneficiary
         const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
         const strategy = yield address_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
         const feeReceiverAccount = address_1.ACCOUNTS.COFI_FEE_RECEIVER(cluster);
-        return yield cofiProgram.methods.stake(amount)
+        return yield cofiProgram.methods.stake(new anchor_1.BN(amount))
             .accounts({
             stakerAccountAuthority: stakerAuthority,
             stakerCofiAccount: staker,

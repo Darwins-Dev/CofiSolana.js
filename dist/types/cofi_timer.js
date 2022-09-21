@@ -259,6 +259,10 @@ exports.IDL = {
                         "type": "i64"
                     },
                     {
+                        "name": "amount",
+                        "type": "u64"
+                    },
+                    {
                         "name": "depositCollected",
                         "type": "bool"
                     },

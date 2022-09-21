@@ -16,12 +16,12 @@ export declare type Cofi = {
                 {
                     "name": "authority";
                     "isMut": false;
-                    "isSigner": false;
+                    "isSigner": true;
                 },
                 {
                     "name": "feeReceiver";
                     "isMut": false;
-                    "isSigner": false;
+                    "isSigner": true;
                 },
                 {
                     "name": "feeReceiverAccount";
@@ -715,7 +715,7 @@ export declare type Cofi = {
                 {
                     "name": "newAuthority";
                     "isMut": false;
-                    "isSigner": false;
+                    "isSigner": true;
                 },
                 {
                     "name": "cofiMint";

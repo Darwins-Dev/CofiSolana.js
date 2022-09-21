@@ -1,35 +1,42 @@
-import { ACCOUNTS, } from '../utils/address';
-import { cofi, CofiSolanaConfig } from '../types';
-import { web3, Provider, Program, SplToken, Spl, BN } from '@project-serum/anchor';
+import { ACCOUNTS, } from '../../utils/address';
+import { cofiTimer, CofiSolanaConfig } from '../../types';
+import { web3, Program, BN, } from '@project-serum/anchor';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { getCofiTimerAccount, getCofiTimerAddress } from '../../account/getCofiTimerAccount';
+import { getAssociatedLiquidityAddress, getCofiAccount } from '../..';
 
-export async function withdrawInstruction(
+export async function collectDepositInstruction(
   cofiSolanaConfig: CofiSolanaConfig,
-  cofiAccountAuthority: web3.PublicKey,
-  sourceCofiAccount: web3.PublicKey,
-  destinationLiquidityAccount: web3.PublicKey,
-  amount: number | string | number[] | Uint8Array | Buffer | BN,
+  timerOwnedAccount: web3.PublicKey,
+  destinationLiquidityAccount?: web3.PublicKey,
 ): Promise<web3.TransactionInstruction> {
   const {
     version, cluster, provider
   } = cofiSolanaConfig;
-  const cofiProgram = 
-    new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-
+  const cofiTimerProgram = new Program<cofiTimer.CofiTimer>(cofiTimer.IDL, ACCOUNTS.COFI_TIMER_ID(cluster), provider);
+  const cofiTimerAccount = await getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccount);
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
   const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
-  const feeReceiverAccount = ACCOUNTS.COFI_FEE_RECEIVER(cluster);
 
-  return await cofiProgram.methods.withdraw(new BN(amount))
+  const cofiTimerAccountState = await getCofiTimerAccount(cofiSolanaConfig, cofiTimerAccount);
+  const stakerAccount = cofiTimerAccountState.stakerAccount;
+  if(!destinationLiquidityAccount) {
+    const stakerAccountState = await getCofiAccount(cofiSolanaConfig, stakerAccount);
+    destinationLiquidityAccount = await getAssociatedLiquidityAddress(cofiSolanaConfig, stakerAccountState.authority);
+  }
+
+  return await cofiTimerProgram.methods.collectDeposit() 
     .accounts({
-      cofiAccountAuthority,
-      sourceCofiAccount,
-      feeReceiverAccount,
-      destinationLiquidityAccount,
+      cofiTimer: cofiTimerAccount,
+      timerOwnedAccount, 
+      stakerCofiAccount: stakerAccount,
+      stakerLiquidityAccount: destinationLiquidityAccount,
+      cofiMintCollateralReserve: collateralReserve,
       cofiMint,
       cofiStrategy: strategy,
-      cofiMintCollateralReserve: collateralReserve,
+      feeReceiverAccount: ACCOUNTS.COFI_FEE_RECEIVER(cluster),
+      cofiProgram: ACCOUNTS.COFI_PROGRAM_ID(cluster),
       cofiStrategyProgram: ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
       clock: web3.SYSVAR_CLOCK_PUBKEY,
     }).remainingAccounts([{
@@ -68,5 +75,5 @@ export async function withdrawInstruction(
       pubkey: TOKEN_PROGRAM_ID,
       isSigner: false,
       isWritable: false,
-    },]).instruction();
+    },]).instruction()
 }

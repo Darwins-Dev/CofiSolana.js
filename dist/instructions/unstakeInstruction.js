@@ -22,7 +22,7 @@ function unstakeInstruction(cofiSolanaConfig, stakerAuthority, staker, beneficia
         ], cofiProgram.programId);
         const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
         const strategy = yield address_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
-        return yield cofiProgram.methods.unstake(amount)
+        return yield cofiProgram.methods.unstake(new anchor_1.BN(amount))
             .accounts({
             stakerAccountAuthority: stakerAuthority,
             stakerCofiAccount: staker,

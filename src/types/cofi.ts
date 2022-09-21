@@ -16,12 +16,12 @@ export type Cofi = {
         {
           "name": "authority",
           "isMut": false,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "feeReceiver",
           "isMut": false,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "feeReceiverAccount",
@@ -715,7 +715,7 @@ export type Cofi = {
         {
           "name": "newAuthority",
           "isMut": false,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "cofiMint",
@@ -1152,12 +1152,12 @@ export const IDL: Cofi = {
         {
           "name": "authority",
           "isMut": false,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "feeReceiver",
           "isMut": false,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "feeReceiverAccount",
@@ -1851,7 +1851,7 @@ export const IDL: Cofi = {
         {
           "name": "newAuthority",
           "isMut": false,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "cofiMint",

@@ -19,12 +19,12 @@ exports.IDL = {
                 {
                     "name": "authority",
                     "isMut": false,
-                    "isSigner": false
+                    "isSigner": true
                 },
                 {
                     "name": "feeReceiver",
                     "isMut": false,
-                    "isSigner": false
+                    "isSigner": true
                 },
                 {
                     "name": "feeReceiverAccount",
@@ -718,7 +718,7 @@ exports.IDL = {
                 {
                     "name": "newAuthority",
                     "isMut": false,
-                    "isSigner": false
+                    "isSigner": true
                 },
                 {
                     "name": "cofiMint",

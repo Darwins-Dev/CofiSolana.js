@@ -7,7 +7,7 @@ export async function unstakeInstruction(
   stakerAuthority: web3.PublicKey,
   staker: web3.PublicKey,
   beneficiary: web3.PublicKey,
-  amount: BN,
+  amount: number | string | number[] | Uint8Array | Buffer | BN,
 ): Promise<web3.TransactionInstruction> {
   const {
     version, cluster, provider
@@ -21,7 +21,7 @@ export async function unstakeInstruction(
   const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
 
-  return await cofiProgram.methods.unstake(amount)
+  return await cofiProgram.methods.unstake(new BN(amount))
     .accounts({
       stakerAccountAuthority: stakerAuthority,
       stakerCofiAccount: staker,

@@ -8,7 +8,7 @@ export async function depositInstruction(
   sourceLiquidityAuthority: web3.PublicKey,
   sourceLiquidityAccount: web3.PublicKey,
   destinationCofiAccount: web3.PublicKey,
-  amount: BN,
+  amount: number | string | number[] | Uint8Array | Buffer | BN,
 ): Promise<web3.TransactionInstruction> {
   const {
     version, cluster, provider
@@ -20,7 +20,7 @@ export async function depositInstruction(
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
   const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
   
-  return await cofiProgram.methods.deposit(amount)
+  return await cofiProgram.methods.deposit(new BN(amount))
     .accounts({
       sourceLiquidityAuthority,
       sourceLiquidityAccount,

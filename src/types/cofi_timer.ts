@@ -256,6 +256,10 @@ export type CofiTimer = {
             "type": "i64"
           },
           {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
             "name": "depositCollected",
             "type": "bool"
           },
@@ -534,6 +538,10 @@ export const IDL: CofiTimer = {
           {
             "name": "expiration",
             "type": "i64"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
           },
           {
             "name": "depositCollected",

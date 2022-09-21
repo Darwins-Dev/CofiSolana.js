@@ -22,7 +22,7 @@ function withdrawInstruction(cofiSolanaConfig, cofiAccountAuthority, sourceCofiA
         const strategy = yield address_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
         const collateralReserve = yield address_1.ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
         const feeReceiverAccount = address_1.ACCOUNTS.COFI_FEE_RECEIVER(cluster);
-        return yield cofiProgram.methods.withdraw(amount)
+        return yield cofiProgram.methods.withdraw(new anchor_1.BN(amount))
             .accounts({
             cofiAccountAuthority,
             sourceCofiAccount,
