@@ -76,10 +76,6 @@ export declare function getCofiAccount(cofiSolanaConfig: CofiSolanaConfig, publi
             docs: ["mint authority. any change to state requires authority signature."];
             type: "publicKey";
         }, {
-            name: "rateUpdateSlotsElapsed";
-            docs: ["minimum slots elapsed to update exchange rate on strategy"];
-            type: "u64";
-        }, {
             name: "activeStrategy";
             docs: ["strategy used for interest generation. pubkey for strategy account."];
             type: "publicKey";

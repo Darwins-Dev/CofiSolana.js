@@ -176,11 +176,6 @@ exports.IDL = {
                     "isSigner": false
                 },
                 {
-                    "name": "stakerLiquidityAccount",
-                    "isMut": false,
-                    "isSigner": false
-                },
-                {
                     "name": "beneficiaryCofiAccount",
                     "isMut": false,
                     "isSigner": false

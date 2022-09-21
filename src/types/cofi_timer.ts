@@ -173,11 +173,6 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "stakerLiquidityAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "beneficiaryCofiAccount",
           "isMut": false,
           "isSigner": false
@@ -454,11 +449,6 @@ export const IDL: CofiTimer = {
         {
           "name": "timerOwnedAccount",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakerLiquidityAccount",
-          "isMut": false,
           "isSigner": false
         },
         {

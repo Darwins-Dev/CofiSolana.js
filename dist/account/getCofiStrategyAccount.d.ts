@@ -5,70 +5,59 @@ export declare function getCofiStrategyAccount(cofiSolanaConfig: CofiSolanaConfi
         kind: "struct";
         fields: [{
             name: "bump";
-            docs: ["pda bump"];
             type: "u8";
         }, {
             name: "version";
-            docs: ["strategy account version"];
             type: "u8";
         }, {
             name: "isActive";
-            docs: ["any instruction involving this strategy account requires `is_active==true'"];
             type: "bool";
         }, {
             name: "lastUpdate";
-            docs: ["last update slot"];
             type: {
                 defined: "LastUpdate";
             };
         }, {
             name: "liquidity";
-            docs: ["liquidity spl-token information"];
             type: {
                 defined: "StrategyLiquidity";
             };
         }, {
             name: "collateral";
-            docs: ["collateral spl-token collateral"];
             type: {
                 defined: "StrategyCollateral";
             };
         }, {
             name: "strategyProgramId";
-            docs: ["program id of underlying defi protocol e.g. Solend program"];
             type: "publicKey";
         }, {
             name: "depositInstruction";
-            docs: ["deposit or equivalent instruction discriminator"];
+            docs: ["deposit instruction info"];
             type: {
                 defined: "StrategyInstruction";
             };
         }, {
             name: "mintToInstruction";
-            docs: ["mint_to or equivalent instruciton discriminator"];
+            docs: ["mint_to instruciton info"];
             type: {
                 defined: "StrategyInstruction";
             };
         }, {
             name: "withdrawInstruction";
-            docs: ["withdraw or equivalent instruction discriminator"];
+            docs: ["withdraw instruction info"];
             type: {
                 defined: "StrategyInstruction";
             };
         }, {
             name: "redeemInstruction";
-            docs: ["redeem or equivalent instruction info"];
+            docs: ["redeem instruction info"];
             type: {
                 defined: "StrategyInstruction";
             };
         }, {
             name: "exchangeRate";
-            docs: ["liquidity to collateral exchange rate"];
+            docs: ["configurables", "liquidity to collateral exchange rate"];
             type: "u128";
-        }, {
-            name: "authority";
-            docs: ["strategy account authority"];
-            type: "publicKey";
         }];
     };
 }, import("@project-serum/anchor").IdlTypes<cofiStrategy.CofiStrategy>>>;

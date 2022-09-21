@@ -639,30 +639,6 @@ export declare type Cofi = {
             ];
         },
         {
-            "name": "updateRateUpdateSlotsElapsed";
-            "docs": [
-                "change minimum slots elapsed for updating exchange rate"
-            ];
-            "accounts": [
-                {
-                    "name": "authority";
-                    "isMut": false;
-                    "isSigner": true;
-                },
-                {
-                    "name": "cofiMint";
-                    "isMut": true;
-                    "isSigner": false;
-                }
-            ];
-            "args": [
-                {
-                    "name": "newValue";
-                    "type": "u64";
-                }
-            ];
-        },
-        {
             "name": "setFeeReceiver";
             "docs": [
                 "change fee receiver"
@@ -850,13 +826,6 @@ export declare type Cofi = {
                             "mint authority. any change to state requires authority signature."
                         ];
                         "type": "publicKey";
-                    },
-                    {
-                        "name": "rateUpdateSlotsElapsed";
-                        "docs": [
-                            "minimum slots elapsed to update exchange rate on strategy"
-                        ];
-                        "type": "u64";
                     },
                     {
                         "name": "activeStrategy";
