@@ -15,6 +15,7 @@ const types_1 = require("../../types");
 const anchor_1 = require("@project-serum/anchor");
 const spl_token_1 = require("@solana/spl-token");
 const getCofiTimerAccount_1 = require("../../account/getCofiTimerAccount");
+const __1 = require("../..");
 function collectDepositInstruction(cofiSolanaConfig, timerOwnedAccount, destinationLiquidityAccount) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
@@ -25,10 +26,10 @@ function collectDepositInstruction(cofiSolanaConfig, timerOwnedAccount, destinat
         const collateralReserve = yield address_1.ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
         const cofiTimerAccountState = yield (0, getCofiTimerAccount_1.getCofiTimerAccount)(cofiSolanaConfig, cofiTimerAccount);
         const stakerAccount = cofiTimerAccountState.stakerAccount;
-        // if(!destinationLiquidityAccount) {
-        //   const stakerAccountState = await getCofiAccount(cofiSolanaConfig, stakerAccount);
-        //   destinationLiquidityAccount = await getAssociatedLiquidityAddress(cofiSolanaConfig, stakerAccountState.authority);
-        // }
+        if (!destinationLiquidityAccount) {
+            const stakerAccountState = yield (0, __1.getCofiAccount)(cofiSolanaConfig, stakerAccount);
+            destinationLiquidityAccount = yield (0, __1.getAssociatedLiquidityAddress)(cofiSolanaConfig, stakerAccountState.authority);
+        }
         return yield cofiTimerProgram.methods.collectDeposit()
             .accounts({
             cofiTimer: cofiTimerAccount,

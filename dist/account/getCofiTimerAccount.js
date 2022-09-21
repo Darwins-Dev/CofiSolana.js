@@ -17,15 +17,16 @@ function getCofiTimerAccount(cofiSolanaConfig, cofiTimerAddress) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         const cofiTimerProgram = new anchor_1.Program(types_1.cofiTimer.IDL, address_1.ACCOUNTS.COFI_TIMER_ID(cluster), provider);
-        return yield cofiTimerProgram.account.cofiTimer.fetch(cofiTimerAddress);
+        return cofiTimerProgram.account.cofiTimer.fetch(cofiTimerAddress);
     });
 }
 exports.getCofiTimerAccount = getCofiTimerAccount;
 function getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccount) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
-        const cofiTimerProgram = new anchor_1.Program(types_1.cofiTimer.IDL, address_1.ACCOUNTS.COFI_TIMER_ID(cluster), provider);
-        return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_timer', 'utf-8'), timerOwnedAccount.toBuffer()], cofiTimerProgram.programId))[0];
+        return (yield anchor_1.web3.PublicKey.findProgramAddress([
+            Buffer.from('cofi_timer', 'utf-8'), timerOwnedAccount.toBuffer()
+        ], address_1.ACCOUNTS.COFI_TIMER_ID(cluster)))[0];
     });
 }
 exports.getCofiTimerAddress = getCofiTimerAddress;

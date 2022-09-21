@@ -8,7 +8,7 @@ import { getAssociatedLiquidityAddress, getCofiAccount } from '../..';
 export async function collectDepositInstruction(
   cofiSolanaConfig: CofiSolanaConfig,
   timerOwnedAccount: web3.PublicKey,
-  destinationLiquidityAccount: web3.PublicKey,
+  destinationLiquidityAccount?: web3.PublicKey,
 ): Promise<web3.TransactionInstruction> {
   const {
     version, cluster, provider
@@ -21,10 +21,10 @@ export async function collectDepositInstruction(
 
   const cofiTimerAccountState = await getCofiTimerAccount(cofiSolanaConfig, cofiTimerAccount);
   const stakerAccount = cofiTimerAccountState.stakerAccount;
-  // if(!destinationLiquidityAccount) {
-  //   const stakerAccountState = await getCofiAccount(cofiSolanaConfig, stakerAccount);
-  //   destinationLiquidityAccount = await getAssociatedLiquidityAddress(cofiSolanaConfig, stakerAccountState.authority);
-  // }
+  if(!destinationLiquidityAccount) {
+    const stakerAccountState = await getCofiAccount(cofiSolanaConfig, stakerAccount);
+    destinationLiquidityAccount = await getAssociatedLiquidityAddress(cofiSolanaConfig, stakerAccountState.authority);
+  }
 
   return await cofiTimerProgram.methods.collectDeposit() 
     .accounts({

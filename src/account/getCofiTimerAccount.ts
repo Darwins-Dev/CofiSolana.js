@@ -10,7 +10,7 @@ export async function getCofiTimerAccount(
     version, cluster, provider
   } = cofiSolanaConfig;
   const cofiTimerProgram = new Program<cofiTimer.CofiTimer>(cofiTimer.IDL, ACCOUNTS.COFI_TIMER_ID(cluster), provider);
-  return await cofiTimerProgram.account.cofiTimer.fetch(cofiTimerAddress)
+  return cofiTimerProgram.account.cofiTimer.fetch(cofiTimerAddress)
 }
 
 export async function getCofiTimerAddress(
@@ -20,9 +20,8 @@ export async function getCofiTimerAddress(
   const {
     version, cluster, provider
   } = cofiSolanaConfig;
-  const cofiTimerProgram = new Program<cofiTimer.CofiTimer>(cofiTimer.IDL, ACCOUNTS.COFI_TIMER_ID(cluster), provider);
-  return (await web3.PublicKey.findProgramAddress(
-    [Buffer.from('cofi_timer', 'utf-8'), timerOwnedAccount.toBuffer()],
-    cofiTimerProgram.programId,
+  return (await web3.PublicKey.findProgramAddress([
+      Buffer.from('cofi_timer', 'utf-8'), timerOwnedAccount.toBuffer()
+    ],ACCOUNTS.COFI_TIMER_ID(cluster),
   ))[0];
 }
