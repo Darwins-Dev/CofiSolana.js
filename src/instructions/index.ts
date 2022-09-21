@@ -6,10 +6,5 @@ export * from './depositInstruction';
 export * from './withdrawInstruction';
 export * from './stakeInstruction';
 export * from './unstakeInstruction';
-export * from './mergeAccountsInstruction';
 /// token program instructions
 export * from './initAssociatedLiquidityAccount';
-/// cofi timer instructions
-export * from './timerStakeAndLock';
-export * from './initTimerOwnedAccount';
-export * from './timerUnlockUnstakeMerge';

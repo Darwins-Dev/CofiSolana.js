@@ -19,12 +19,12 @@ exports.IDL = {
                 {
                     "name": "authority",
                     "isMut": false,
-                    "isSigner": true
+                    "isSigner": false
                 },
                 {
                     "name": "feeReceiver",
                     "isMut": false,
-                    "isSigner": true
+                    "isSigner": false
                 },
                 {
                     "name": "feeReceiverAccount",
@@ -132,46 +132,10 @@ exports.IDL = {
             "args": []
         },
         {
-            "name": "initCofiStake",
-            "docs": [
-                "initialize cofi stake"
-            ],
-            "accounts": [
-                {
-                    "name": "initializer",
-                    "isMut": true,
-                    "isSigner": true
-                },
-                {
-                    "name": "staker",
-                    "isMut": true,
-                    "isSigner": false
-                },
-                {
-                    "name": "recipient",
-                    "isMut": true,
-                    "isSigner": false
-                },
-                {
-                    "name": "cofiStake",
-                    "isMut": true,
-                    "isSigner": false
-                },
-                {
-                    "name": "systemProgram",
-                    "isMut": false,
-                    "isSigner": false
-                },
-                {
-                    "name": "rent",
-                    "isMut": false,
-                    "isSigner": false
-                }
-            ],
-            "args": []
-        },
-        {
             "name": "initAssociatedCofiAcc",
+            "docs": [
+                "initialize associated cofi account"
+            ],
             "accounts": [
                 {
                     "name": "initializer",
@@ -207,9 +171,48 @@ exports.IDL = {
             "args": []
         },
         {
+            "name": "initCofiStake",
+            "docs": [
+                "initialize cofi stake"
+            ],
+            "accounts": [
+                {
+                    "name": "initializer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "staker",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "beneficiary",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiStake",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "rent",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        },
+        {
             "name": "deposit",
             "docs": [
-                "main logic"
+                "liquidity onboarding"
             ],
             "accounts": [
                 {
@@ -262,6 +265,9 @@ exports.IDL = {
         },
         {
             "name": "withdraw",
+            "docs": [
+                "liquidity offboarding"
+            ],
             "accounts": [
                 {
                     "name": "cofiAccountAuthority",
@@ -317,7 +323,65 @@ exports.IDL = {
             ]
         },
         {
+            "name": "withdrawAll",
+            "docs": [
+                "offboard all liquidity"
+            ],
+            "accounts": [
+                {
+                    "name": "cofiAccountAuthority",
+                    "isMut": false,
+                    "isSigner": true
+                },
+                {
+                    "name": "sourceCofiAccount",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "destinationLiquidityAccount",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiMint",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiMintCollateralReserve",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "feeReceiverAccount",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiStrategy",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiStrategyProgram",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "clock",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        },
+        {
             "name": "stake",
+            "docs": [
+                "stake instruction",
+                "Simply put, transferring shares from staker to beneficiary."
+            ],
             "accounts": [
                 {
                     "name": "stakerAccountAuthority",
@@ -374,6 +438,10 @@ exports.IDL = {
         },
         {
             "name": "unstake",
+            "docs": [
+                "unstake instruction",
+                "Simply put, transferring shares from beneficiary to staker."
+            ],
             "accounts": [
                 {
                     "name": "stakerAccountAuthority",
@@ -424,7 +492,10 @@ exports.IDL = {
             ]
         },
         {
-            "name": "mergeAccounts",
+            "name": "transferStakerAuthority",
+            "docs": [
+                "transfer stake amount instruction"
+            ],
             "accounts": [
                 {
                     "name": "sourceAccountAuthority",
@@ -433,12 +504,22 @@ exports.IDL = {
                 },
                 {
                     "name": "sourceCofiAccount",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "sourceStakePair",
                     "isMut": true,
                     "isSigner": false
                 },
                 {
-                    "name": "destinationCofiAccount",
+                    "name": "destinationStakePair",
                     "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "beneficiaryCofiAccount",
+                    "isMut": false,
                     "isSigner": false
                 },
                 {
@@ -447,10 +528,18 @@ exports.IDL = {
                     "isSigner": false
                 }
             ],
-            "args": []
+            "args": [
+                {
+                    "name": "liquidityAmount",
+                    "type": "u64"
+                }
+            ]
         },
         {
             "name": "stakeLockSwitch",
+            "docs": [
+                "lock/unlock [state::CofiStake]"
+            ],
             "accounts": [
                 {
                     "name": "stakerAccountAuthority",
@@ -486,9 +575,33 @@ exports.IDL = {
             "args": []
         },
         {
+            "name": "cofiAccountLockSwitch",
+            "docs": [
+                "lock/unlock [state::CofiAccount]"
+            ],
+            "accounts": [
+                {
+                    "name": "cofiAccountAuthority",
+                    "isMut": false,
+                    "isSigner": true
+                },
+                {
+                    "name": "cofiAccount",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiMint",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        },
+        {
             "name": "pauseOrUnpause",
             "docs": [
-                "authority only interactions"
+                "pause/unpause [state::CofiMint]"
             ],
             "accounts": [
                 {
@@ -506,6 +619,9 @@ exports.IDL = {
         },
         {
             "name": "updateWithdrawFee",
+            "docs": [
+                "change withdraw fee"
+            ],
             "accounts": [
                 {
                     "name": "authority",
@@ -526,7 +642,34 @@ exports.IDL = {
             ]
         },
         {
+            "name": "updateRateUpdateSlotsElapsed",
+            "docs": [
+                "change minimum slots elapsed for updating exchange rate"
+            ],
+            "accounts": [
+                {
+                    "name": "authority",
+                    "isMut": false,
+                    "isSigner": true
+                },
+                {
+                    "name": "cofiMint",
+                    "isMut": true,
+                    "isSigner": false
+                }
+            ],
+            "args": [
+                {
+                    "name": "newValue",
+                    "type": "u64"
+                }
+            ]
+        },
+        {
             "name": "setFeeReceiver",
+            "docs": [
+                "change fee receiver"
+            ],
             "accounts": [
                 {
                     "name": "initializer",
@@ -540,7 +683,7 @@ exports.IDL = {
                 },
                 {
                     "name": "feeReceiver",
-                    "isMut": true,
+                    "isMut": false,
                     "isSigner": true
                 },
                 {
@@ -550,12 +693,36 @@ exports.IDL = {
                 },
                 {
                     "name": "cofiMint",
-                    "isMut": false,
+                    "isMut": true,
                     "isSigner": false
                 },
                 {
                     "name": "systemProgram",
                     "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        },
+        {
+            "name": "transferCofiMintAuthority",
+            "docs": [
+                "change cofi mint authority"
+            ],
+            "accounts": [
+                {
+                    "name": "authority",
+                    "isMut": false,
+                    "isSigner": true
+                },
+                {
+                    "name": "newAuthority",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiMint",
+                    "isMut": true,
                     "isSigner": false
                 }
             ],
@@ -571,31 +738,44 @@ exports.IDL = {
                     {
                         "name": "shareAmount",
                         "docs": [
-                            "total shares allocated to user"
+                            "shares of total collateral allocated this account."
                         ],
                         "type": "u64"
                     },
                     {
                         "name": "stakeAmount",
                         "docs": [
-                            "total liquidity staked into user (excluding the user themselves)"
+                            "total liquidity staked into account."
                         ],
                         "type": "u64"
                     },
                     {
                         "name": "depositAmount",
                         "docs": [
-                            "total liquidity deposited by user"
+                            "total liquidity deposited by authority."
                         ],
                         "type": "u64"
                     },
                     {
                         "name": "mint",
+                        "docs": [
+                            "[state::CofiMint] this account was initialized with."
+                        ],
                         "type": "publicKey"
                     },
                     {
                         "name": "authority",
+                        "docs": [
+                            "signer or \"owner\" of this account. Any change to state requires authority signature."
+                        ],
                         "type": "publicKey"
+                    },
+                    {
+                        "name": "isLocked",
+                        "docs": [
+                            "cannot interact with a locked account"
+                        ],
+                        "type": "bool"
                     },
                     {
                         "name": "extraSpace",
@@ -624,7 +804,7 @@ exports.IDL = {
                     {
                         "name": "bump",
                         "docs": [
-                            "pda bump"
+                            "`CofiMint` account pubkey pda bump"
                         ],
                         "type": "u8"
                     },
@@ -638,21 +818,21 @@ exports.IDL = {
                     {
                         "name": "isActive",
                         "docs": [
-                            "all instructions paused"
+                            "all instructions that involve this `CofiMint` requires `is_active == true`"
                         ],
                         "type": "bool"
                     },
                     {
                         "name": "totalShares",
                         "docs": [
-                            "total shares minted"
+                            "total shares minted."
                         ],
                         "type": "u64"
                     },
                     {
                         "name": "liquidityReserve",
                         "docs": [
-                            "liquidity account"
+                            "liquidity reserve. holds liquidity owned by this `CofiMint`"
                         ],
                         "type": {
                             "defined": "SplReserve"
@@ -661,7 +841,7 @@ exports.IDL = {
                     {
                         "name": "collateralReserve",
                         "docs": [
-                            "collateral account"
+                            "collateral reserve. holds collateral owned by this `CofiMint`."
                         ],
                         "type": {
                             "defined": "SplReserve"
@@ -670,9 +850,16 @@ exports.IDL = {
                     {
                         "name": "authority",
                         "docs": [
-                            "mint authority"
+                            "mint authority. any change to state requires authority signature."
                         ],
                         "type": "publicKey"
+                    },
+                    {
+                        "name": "rateUpdateSlotsElapsed",
+                        "docs": [
+                            "minimum slots elapsed to update exchange rate on strategy"
+                        ],
+                        "type": "u64"
                     },
                     {
                         "name": "activeStrategy",
@@ -684,14 +871,14 @@ exports.IDL = {
                     {
                         "name": "feeReceiver",
                         "docs": [
-                            "fee receiver signateur"
+                            "fee receiver authority"
                         ],
                         "type": "publicKey"
                     },
                     {
                         "name": "feeReceiverAccount",
                         "docs": [
-                            "fee receiver cofi account"
+                            "fee receiver cofi account, the authority of which is `fee_receiver`."
                         ],
                         "type": "publicKey"
                     },
@@ -714,22 +901,37 @@ exports.IDL = {
                 "fields": [
                     {
                         "name": "bump",
+                        "docs": [
+                            "pda bump"
+                        ],
                         "type": "u8"
                     },
                     {
                         "name": "amount",
+                        "docs": [
+                            "liquidity staked by staker to beneficiary"
+                        ],
                         "type": "u64"
                     },
                     {
                         "name": "staker",
+                        "docs": [
+                            "staker cofi account"
+                        ],
                         "type": "publicKey"
                     },
                     {
                         "name": "beneficiary",
+                        "docs": [
+                            "beneficiary cofi account"
+                        ],
                         "type": "publicKey"
                     },
                     {
                         "name": "isLocked",
+                        "docs": [
+                            "Excluding [stake_lock_switch()], any instruciton involving this `CofiStake` requires `is_locked == false`"
+                        ],
                         "type": "bool"
                     },
                     {
@@ -748,19 +950,31 @@ exports.IDL = {
     "types": [
         {
             "name": "SplReserve",
+            "docs": [
+                "Spl token reserve"
+            ],
             "type": {
                 "kind": "struct",
                 "fields": [
                     {
                         "name": "mint",
+                        "docs": [
+                            "spl token mint"
+                        ],
                         "type": "publicKey"
                     },
                     {
                         "name": "account",
+                        "docs": [
+                            "spl token account"
+                        ],
                         "type": "publicKey"
                     },
                     {
                         "name": "amount",
+                        "docs": [
+                            "amount of spl token held by [self.acccount]. avoid involving [self.account]"
+                        ],
                         "type": "u64"
                     }
                 ]
@@ -804,21 +1018,6 @@ exports.IDL = {
             ]
         },
         {
-            "name": "MergeAccountEvent",
-            "fields": [
-                {
-                    "name": "sourceAccount",
-                    "type": "publicKey",
-                    "index": false
-                },
-                {
-                    "name": "destinationAccount",
-                    "type": "publicKey",
-                    "index": false
-                }
-            ]
-        },
-        {
             "name": "StakeEvent",
             "fields": [
                 {
@@ -828,6 +1027,21 @@ exports.IDL = {
                 },
                 {
                     "name": "stakePair",
+                    "type": "publicKey",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "TransferStakerAuthEvent",
+            "fields": [
+                {
+                    "name": "sourceStakePair",
+                    "type": "publicKey",
+                    "index": false
+                },
+                {
+                    "name": "destinationStakePair",
                     "type": "publicKey",
                     "index": false
                 }
@@ -872,63 +1086,53 @@ exports.IDL = {
         },
         {
             "code": 6001,
-            "name": "InvalidCluster",
-            "msg": "connected to invalid cluster"
-        },
-        {
-            "code": 6002,
             "name": "InvalidInitAccount",
             "msg": "invalid initialization account"
         },
         {
-            "code": 6003,
+            "code": 6002,
             "name": "InvalidWithdrawFee",
             "msg": "invalid withdraw fee rate"
         },
         {
-            "code": 6004,
+            "code": 6003,
             "name": "MathOverflow",
             "msg": "math overflow"
         },
         {
-            "code": 6005,
+            "code": 6004,
             "name": "MathUnderflow",
             "msg": "math underflow"
         },
         {
-            "code": 6006,
+            "code": 6005,
             "name": "InsufficientShares",
             "msg": "not enough shares of collateral allocated to account"
         },
         {
-            "code": 6007,
+            "code": 6006,
             "name": "InsufficientDeposits",
             "msg": "not enough deposited liquidity in account"
         },
         {
-            "code": 6008,
+            "code": 6007,
             "name": "InsuffiientStakes",
             "msg": "not enough liquidity staked into account"
         },
         {
-            "code": 6009,
+            "code": 6008,
             "name": "ExceedsWithdrawable",
             "msg": "exceeds withdrawable liquidity amount"
         },
         {
-            "code": 6010,
+            "code": 6009,
             "name": "MintPaused",
             "msg": "mint is paused so cannot execute"
         },
         {
-            "code": 6011,
-            "name": "LockedTimedStake",
-            "msg": "locked time stake"
-        },
-        {
-            "code": 6012,
-            "name": "TimedAccountStaker",
-            "msg": "cannot stake with timed cofi account"
+            "code": 6010,
+            "name": "AccountFrozen",
+            "msg": "interacting with frozen account"
         }
     ]
 };

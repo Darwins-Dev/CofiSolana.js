@@ -23,7 +23,7 @@ function initCofiStakeInstruction(cofiSolanaConfig, payer, staker, beneficiary) 
         return yield cofiProgram.methods.initCofiStake().accounts({
             initializer: payer,
             staker,
-            recipient: beneficiary,
+            beneficiary,
             cofiStake: stakePairAccount,
             systemProgram: anchor_1.web3.SystemProgram.programId,
             rent: anchor_1.web3.SYSVAR_RENT_PUBKEY,

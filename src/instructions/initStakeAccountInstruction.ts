@@ -20,7 +20,7 @@ export async function initCofiStakeInstruction(
   return await cofiProgram.methods.initCofiStake().accounts({
       initializer: payer,
       staker,
-      recipient: beneficiary,
+      beneficiary,
       cofiStake: stakePairAccount,
       systemProgram: web3.SystemProgram.programId,
       rent: web3.SYSVAR_RENT_PUBKEY,

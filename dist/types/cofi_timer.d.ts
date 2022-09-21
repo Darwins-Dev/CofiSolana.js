@@ -5,17 +5,12 @@ export declare type CofiTimer = {
         {
             "name": "initTimerOwnedAccount";
             "docs": [
-                "initializes timer and timer_owned_account"
+                "initializes timer and initializes and deposits into timer owned account"
             ];
             "accounts": [
                 {
                     "name": "initializer";
                     "isMut": true;
-                    "isSigner": true;
-                },
-                {
-                    "name": "stakerAuthority";
-                    "isMut": false;
                     "isSigner": true;
                 },
                 {
@@ -39,12 +34,37 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 },
                 {
-                    "name": "cofiMint";
+                    "name": "sourceLiquidityAuthority";
                     "isMut": false;
+                    "isSigner": true;
+                },
+                {
+                    "name": "sourceLiquidityAccount";
+                    "isMut": true;
+                    "isSigner": false;
+                },
+                {
+                    "name": "cofiMintCollateralReserve";
+                    "isMut": true;
+                    "isSigner": false;
+                },
+                {
+                    "name": "cofiMint";
+                    "isMut": true;
+                    "isSigner": false;
+                },
+                {
+                    "name": "cofiStrategy";
+                    "isMut": true;
                     "isSigner": false;
                 },
                 {
                     "name": "cofiProgram";
+                    "isMut": false;
+                    "isSigner": false;
+                },
+                {
+                    "name": "cofiStrategyProgram";
                     "isMut": false;
                     "isSigner": false;
                 },
@@ -57,33 +77,32 @@ export declare type CofiTimer = {
                     "name": "rent";
                     "isMut": false;
                     "isSigner": false;
+                },
+                {
+                    "name": "clock";
+                    "isMut": false;
+                    "isSigner": false;
                 }
             ];
             "args": [
                 {
                     "name": "expiration";
                     "type": "i64";
+                },
+                {
+                    "name": "liquidityAmount";
+                    "type": "u64";
                 }
             ];
         },
         {
-            "name": "stakeAndLock";
+            "name": "collectDeposit";
             "docs": [
-                "stakes into timer_owned_account and locks stake account"
+                "withdraws the initial deposit from the `timer_owned_account`"
             ];
             "accounts": [
                 {
-                    "name": "stakerAccountAuthority";
-                    "isMut": false;
-                    "isSigner": true;
-                },
-                {
                     "name": "cofiTimer";
-                    "isMut": false;
-                    "isSigner": false;
-                },
-                {
-                    "name": "stakerCofiAccount";
                     "isMut": true;
                     "isSigner": false;
                 },
@@ -93,7 +112,17 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 },
                 {
-                    "name": "timerCofiStakePair";
+                    "name": "stakerCofiAccount";
+                    "isMut": false;
+                    "isSigner": false;
+                },
+                {
+                    "name": "stakerLiquidityAccount";
+                    "isMut": true;
+                    "isSigner": false;
+                },
+                {
+                    "name": "cofiMintCollateralReserve";
                     "isMut": true;
                     "isSigner": false;
                 },
@@ -101,9 +130,6 @@ export declare type CofiTimer = {
                     "name": "cofiMint";
                     "isMut": true;
                     "isSigner": false;
-                    "docs": [
-                        "required accounts for staking"
-                    ];
                 },
                 {
                     "name": "cofiStrategy";
@@ -131,36 +157,13 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 }
             ];
-            "args": [
-                {
-                    "name": "amount";
-                    "type": "u64";
-                }
-            ];
+            "args": [];
         },
         {
-            "name": "unlockUnstakeMerge";
-            "docs": [
-                "unlocks stake account, unstakes from timer_owned_account, and merges timer_owned_account with beneficiary"
-            ];
+            "name": "collectInterest";
             "accounts": [
                 {
-                    "name": "stakerAccountAuthority";
-                    "isMut": false;
-                    "isSigner": true;
-                },
-                {
                     "name": "cofiTimer";
-                    "isMut": false;
-                    "isSigner": false;
-                },
-                {
-                    "name": "stakerCofiAccount";
-                    "isMut": true;
-                    "isSigner": false;
-                },
-                {
-                    "name": "beneficiaryCofiAccount";
                     "isMut": true;
                     "isSigner": false;
                 },
@@ -170,21 +173,38 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 },
                 {
-                    "name": "timerCofiStakePair";
+                    "name": "stakerLiquidityAccount";
+                    "isMut": false;
+                    "isSigner": false;
+                },
+                {
+                    "name": "beneficiaryCofiAccount";
+                    "isMut": false;
+                    "isSigner": false;
+                },
+                {
+                    "name": "beneficiaryLiquidityAccount";
+                    "isMut": true;
+                    "isSigner": false;
+                },
+                {
+                    "name": "cofiMintCollateralReserve";
                     "isMut": true;
                     "isSigner": false;
                 },
                 {
                     "name": "cofiMint";
-                    "isMut": false;
+                    "isMut": true;
                     "isSigner": false;
-                    "docs": [
-                        "required accounts for unstaking"
-                    ];
                 },
                 {
                     "name": "cofiStrategy";
-                    "isMut": false;
+                    "isMut": true;
+                    "isSigner": false;
+                },
+                {
+                    "name": "feeReceiverAccount";
+                    "isMut": true;
                     "isSigner": false;
                 },
                 {
@@ -209,6 +229,9 @@ export declare type CofiTimer = {
     "accounts": [
         {
             "name": "cofiTimer";
+            "docs": [
+                "holds maturity date, the staker, the cofi-account that will temporarily holds shares, and eventual beneficiary of the generated interest"
+            ];
             "type": {
                 "kind": "struct";
                 "fields": [
@@ -231,6 +254,14 @@ export declare type CofiTimer = {
                     {
                         "name": "expiration";
                         "type": "i64";
+                    },
+                    {
+                        "name": "depositCollected";
+                        "type": "bool";
+                    },
+                    {
+                        "name": "interestCollected";
+                        "type": "bool";
                     },
                     {
                         "name": "extraSpace";

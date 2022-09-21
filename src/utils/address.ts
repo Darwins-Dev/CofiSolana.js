@@ -19,6 +19,17 @@ export const DEVNET_SIMP_MINT = new web3.PublicKey("8HFjaos5KaoP25VU3XAnHxacymHV
 export const DEVNET_SIMP_CTOKEN = new web3.PublicKey("DHrXwJAeCZmwpV2FbrQ2HerC2Jo8ZhBZeLJkpiPgEr2G");
 export const DEVNET_SIMP_LIQ_SUPPLY = new web3.PublicKey("Bpy8EA7SLCbkppEHWfXTCwNzdYePjH5rm7sPsmdN7a95");
 
+export const DEVNET_COFI_SOL = new web3.PublicKey("2Xi8qBg2T66Q6SDoLq4mwU7wW3Yf4SAFZRocD2nZdzAe");
+export const DEVNET_COFI_STRATEGY_SOL = new web3.PublicKey("9MKNtecXPBb6WxF36fhDDX1tBqTe4LeuCYfkgmUUkpaq");
+
+export const DEVNET_COFI_SIMP = new web3.PublicKey("BLG2ZfiVKRWtcy1aqAjeUFabRtkRA7y7HsBmodfyh6gh");
+export const DEVNET_COFI_STRATEGY_SIMP = new web3.PublicKey("Gp3ppaJZbbtJtBGBNbKbyZSjibKXmDZj1MRb2PUN3xai");
+export const DEVNET_COFI_TIMER_SIMP = new web3.PublicKey("6xq3zBK3EkLBBp9hZS8vJUX8CyZoe3DwN399e2Uv2trv");
+
+export const DEVNET_COFI_SIMP_FEE_RECEIVER = new web3.PublicKey("FXccWBWFZ6HxoaYgVmb6PPPLQ7UhEsMMEi3gHHZDKBTG");
+export const MAINNET_COFI_USDC_FEE_RECEIVER = new web3.PublicKey("HfhJPekGQip2bQFWc5XZQG4DT3BzJM3PPwQGW731D3BY")
+
+/// MAINNET
 export const MAINNET_PROGRAM_ID = new web3.PublicKey("So1endDq2YkqhipRh3WViPa8hdiSpxWy6z3Z6tMCpAo");
 export const MAINNET_LENDING_MARKET = new web3.PublicKey("4UpD2fh7xH3VP9QQaXtsS1YY3bxzWhtfpks7FatyKvdY");
 export const MAINNET_LENDING_MARKET_AUTH = new web3.PublicKey("DdZR6zRFiUt4S5mg7AV1uKB2z1f1WzcNYCaTEEWPAuby");
@@ -28,14 +39,9 @@ export const MAINNET_USDC_CTOKEN = new web3.PublicKey("993dVFL2uXWYeoXuEBFXR4Bij
 export const MAINNET_USDC_RESERVE_LIQ_SUPPLY = new web3.PublicKey("8SheGtsopRUDzdiD6v6BR9a6bqZ9QwywYQY99Fp5meNf");
 export const MAINNET_USDC_MINT = new web3.PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
 
-export const DEVNET_COFI_SOL = new web3.PublicKey("2Xi8qBg2T66Q6SDoLq4mwU7wW3Yf4SAFZRocD2nZdzAe");
-export const DEVNET_COFI_STRATEGY_SOL = new web3.PublicKey("9MKNtecXPBb6WxF36fhDDX1tBqTe4LeuCYfkgmUUkpaq");
-
-export const DEVNET_COFI_SIMP = new web3.PublicKey("BLG2ZfiVKRWtcy1aqAjeUFabRtkRA7y7HsBmodfyh6gh");
-export const DEVNET_COFI_STRATEGY_SIMP = new web3.PublicKey("Gp3ppaJZbbtJtBGBNbKbyZSjibKXmDZj1MRb2PUN3xai");
-export const DEVNET_COFI_TIMER_SIMP = new web3.PublicKey("6xq3zBK3EkLBBp9hZS8vJUX8CyZoe3DwN399e2Uv2trv");
-
-export const DEVNET_COFI_SIMP_FEE_RECEIVER = new web3.PublicKey("FXccWBWFZ6HxoaYgVmb6PPPLQ7UhEsMMEi3gHHZDKBTG");
+export const MAINNET_COFI_STRATEGY_USDC = new web3.PublicKey("DjEC8hSjV1aPXRq9gYMi2xhoEe26Qk9FEeyQfrLVh8BX");
+export const MAINNET_COFI_USDC = new web3.PublicKey("24B4S2V4anitSG9dmK22biJycNnUZ4PaNYi4J8bVbGxZ");
+export const MAINNET_COFI_TIMER_USDC = new web3.PublicKey("44in9En1utFL4VHj6AJCFaPv8A4825MtNB26FStdr1TY");
 
 export const ACCOUNTS = {
   SOLEND_PROGRAM_ID: (cluster: ClusterType): web3.PublicKey=>{
@@ -119,7 +125,7 @@ export const ACCOUNTS = {
       case "simp":
         return DEVNET_COFI_SIMP
       case "mainnet":
-        throw new Error("MAINNET NOT READY YET")
+        return MAINNET_COFI_USDC
     }
   },
   COFI_TIMER_ID: (cluster: ClusterType): web3.PublicKey=>{
@@ -128,7 +134,7 @@ export const ACCOUNTS = {
       case "simp":
         return DEVNET_COFI_TIMER_SIMP
       case "mainnet":
-        throw new Error("MAINNET NOT READY YET")
+        return MAINNET_COFI_TIMER_USDC
     }
   },
   COFI_STRATEGY_PROGRAM_ID: (cluster: ClusterType): web3.PublicKey=>{
@@ -138,7 +144,7 @@ export const ACCOUNTS = {
       case "simp":
         return DEVNET_COFI_STRATEGY_SIMP
       case "mainnet":
-        throw new Error("MAINNET NOT READY YET")
+        return MAINNET_COFI_STRATEGY_USDC
     }
   },
   COFI_MINT: async (version: number, cluster: ClusterType): Promise<web3.PublicKey> => {
@@ -159,6 +165,13 @@ export const ACCOUNTS = {
       [Buffer.from('cofi_collateral_reserve', 'utf-8'), 
         (await ACCOUNTS.COFI_MINT(version, cluster)).toBuffer(), 
         ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer()],
+        ACCOUNTS.COFI_PROGRAM_ID(cluster),))[0];
+  },
+  COFI_LIQUIDITY_RESERVE: async(version: number, cluster: ClusterType): Promise<web3.PublicKey> => {
+    return (await web3.PublicKey.findProgramAddress(
+      [Buffer.from('cofi_liquidity_reserve', 'utf-8'), 
+        (await ACCOUNTS.COFI_MINT(version, cluster)).toBuffer(), 
+        ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()],
         ACCOUNTS.COFI_PROGRAM_ID(cluster),))[0];
   },
 }

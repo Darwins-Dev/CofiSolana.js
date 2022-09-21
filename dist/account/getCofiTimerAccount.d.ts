@@ -2,6 +2,7 @@ import { cofiTimer, CofiSolanaConfig } from '../types';
 import { web3 } from '@project-serum/anchor';
 export declare function getCofiTimerAccount(cofiSolanaConfig: CofiSolanaConfig, cofiTimerAddress: web3.PublicKey): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
     name: "cofiTimer";
+    docs: ["holds maturity date, the staker, the cofi-account that will temporarily holds shares, and eventual beneficiary of the generated interest"];
     type: {
         kind: "struct";
         fields: [{
@@ -19,6 +20,12 @@ export declare function getCofiTimerAccount(cofiSolanaConfig: CofiSolanaConfig, 
         }, {
             name: "expiration";
             type: "i64";
+        }, {
+            name: "depositCollected";
+            type: "bool";
+        }, {
+            name: "interestCollected";
+            type: "bool";
         }, {
             name: "extraSpace";
             type: {

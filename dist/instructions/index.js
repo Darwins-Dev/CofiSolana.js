@@ -22,10 +22,5 @@ __exportStar(require("./depositInstruction"), exports);
 __exportStar(require("./withdrawInstruction"), exports);
 __exportStar(require("./stakeInstruction"), exports);
 __exportStar(require("./unstakeInstruction"), exports);
-__exportStar(require("./mergeAccountsInstruction"), exports);
 /// token program instructions
 __exportStar(require("./initAssociatedLiquidityAccount"), exports);
-/// cofi timer instructions
-__exportStar(require("./timerStakeAndLock"), exports);
-__exportStar(require("./initTimerOwnedAccount"), exports);
-__exportStar(require("./timerUnlockUnstakeMerge"), exports);
