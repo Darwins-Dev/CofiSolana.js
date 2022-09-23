@@ -20,7 +20,7 @@ function unstakeInstruction(cofiSolanaConfig, stakerAuthority, staker, beneficia
         const [stakePairAccount, stakePairAccountBump] = yield anchor_1.web3.PublicKey.findProgramAddress([
             Buffer.from("cofi_stake", 'utf-8'), staker.toBuffer(), beneficiary.toBuffer(),
         ], cofiProgram.programId);
-        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
+        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(cluster);
         const strategy = yield address_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
         return yield cofiProgram.methods.unstake(new anchor_1.BN(amount))
             .accounts({

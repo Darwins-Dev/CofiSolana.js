@@ -13,7 +13,7 @@ export async function initCofiAccountInstruction(
   } = cofiSolanaConfig;
   const cofiProgram = 
     new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-  const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
+  const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
 
   return await cofiProgram.methods.initCofiAcc()
     .accounts({

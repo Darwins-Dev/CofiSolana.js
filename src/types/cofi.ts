@@ -19,16 +19,6 @@ export type Cofi = {
           "isSigner": true
         },
         {
-          "name": "feeReceiver",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "feeReceiverAccount",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
           "name": "cofiMint",
           "isMut": true,
           "isSigner": false
@@ -54,6 +44,11 @@ export type Cofi = {
           "isSigner": false
         },
         {
+          "name": "feeReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "strategy",
           "isMut": false,
           "isSigner": false
@@ -75,10 +70,6 @@ export type Cofi = {
         }
       ],
       "args": [
-        {
-          "name": "version",
-          "type": "u8"
-        },
         {
           "name": "activate",
           "type": "bool"
@@ -292,7 +283,7 @@ export type Cofi = {
           "isSigner": false
         },
         {
-          "name": "feeReceiverAccount",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         },
@@ -318,60 +309,6 @@ export type Cofi = {
           "type": "u64"
         }
       ]
-    },
-    {
-      "name": "withdrawAll",
-      "docs": [
-        "offboard all liquidity"
-      ],
-      "accounts": [
-        {
-          "name": "cofiAccountAuthority",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "sourceCofiAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "destinationLiquidityAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cofiMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cofiMintCollateralReserve",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "feeReceiverAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cofiStrategy",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cofiStrategyProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "clock",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
     },
     {
       "name": "stake",
@@ -411,7 +348,7 @@ export type Cofi = {
           "isSigner": false
         },
         {
-          "name": "feeReceiverAccount",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         },
@@ -626,7 +563,7 @@ export type Cofi = {
           "isSigner": true
         },
         {
-          "name": "cofiMint",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         }
@@ -639,46 +576,7 @@ export type Cofi = {
       ]
     },
     {
-      "name": "setFeeReceiver",
-      "docs": [
-        "change fee receiver"
-      ],
-      "accounts": [
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "mintAuthority",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "feeReceiver",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "feeReceiverAccount",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "cofiMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "transferCofiMintAuthority",
+      "name": "transferMintAuthority",
       "docs": [
         "change cofi mint authority"
       ],
@@ -691,6 +589,49 @@ export type Cofi = {
         {
           "name": "newAuthority",
           "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "cofiMint",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transferFeeReceiverAuthority",
+      "docs": [
+        "change cofi fee receiver authority"
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "newAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "cofiFeeReceiver",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeCofiMint",
+      "docs": [
+        "close cofi mint"
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
           "isSigner": true
         },
         {
@@ -763,44 +704,61 @@ export type Cofi = {
       }
     },
     {
-      "name": "cofiMint",
+      "name": "cofiFeeReceiver",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "version",
+            "name": "shareAmount",
             "docs": [
-              "cofi mint version"
+              "share_amount allocated to fee receiver"
             ],
-            "type": "u8"
+            "type": "u64"
           },
           {
-            "name": "bump",
+            "name": "rate",
             "docs": [
-              "`CofiMint` account pubkey pda bump"
-            ],
-            "type": "u8"
-          },
-          {
-            "name": "withdrawFeeRate",
-            "docs": [
-              "withdraw fee ppm"
+              "fee rate on interest generated"
             ],
             "type": "u32"
           },
           {
-            "name": "isActive",
+            "name": "authority",
             "docs": [
-              "all instructions that involve this `CofiMint` requires `is_active == true`"
+              "authority of fee receiver"
             ],
-            "type": "bool"
+            "type": "publicKey"
           },
+          {
+            "name": "extraSpace",
+            "type": {
+              "array": [
+                "u8",
+                512
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "cofiMint",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
             "name": "totalShares",
             "docs": [
               "total shares minted."
             ],
             "type": "u64"
+          },
+          {
+            "name": "authority",
+            "docs": [
+              "mint authority. any change to state requires authority signature."
+            ],
+            "type": "publicKey"
           },
           {
             "name": "liquidityReserve",
@@ -821,13 +779,6 @@ export type Cofi = {
             }
           },
           {
-            "name": "authority",
-            "docs": [
-              "mint authority. any change to state requires authority signature."
-            ],
-            "type": "publicKey"
-          },
-          {
             "name": "activeStrategy",
             "docs": [
               "strategy used for interest generation. pubkey for strategy account."
@@ -835,18 +786,25 @@ export type Cofi = {
             "type": "publicKey"
           },
           {
-            "name": "feeReceiver",
+            "name": "minSlotsElapsedForRateUpdate",
             "docs": [
-              "fee receiver authority"
+              "minimum slots elapsed to update exchange rate on strategy"
             ],
-            "type": "publicKey"
+            "type": "u64"
           },
           {
-            "name": "feeReceiverAccount",
+            "name": "bump",
             "docs": [
-              "fee receiver cofi account, the authority of which is `fee_receiver`."
+              "`CofiMint` account pubkey pda bump"
             ],
-            "type": "publicKey"
+            "type": "u8"
+          },
+          {
+            "name": "isActive",
+            "docs": [
+              "withdraw fee ppm"
+            ],
+            "type": "bool"
           },
           {
             "name": "extraSpace",
@@ -865,13 +823,6 @@ export type Cofi = {
       "type": {
         "kind": "struct",
         "fields": [
-          {
-            "name": "bump",
-            "docs": [
-              "pda bump"
-            ],
-            "type": "u8"
-          },
           {
             "name": "amount",
             "docs": [
@@ -951,6 +902,11 @@ export type Cofi = {
     {
       "name": "InitCofiAccountEvent",
       "fields": [
+        {
+          "name": "authority",
+          "type": "publicKey",
+          "index": false
+        },
         {
           "name": "publicKey",
           "type": "publicKey",
@@ -1124,16 +1080,6 @@ export const IDL: Cofi = {
           "isSigner": true
         },
         {
-          "name": "feeReceiver",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "feeReceiverAccount",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
           "name": "cofiMint",
           "isMut": true,
           "isSigner": false
@@ -1159,6 +1105,11 @@ export const IDL: Cofi = {
           "isSigner": false
         },
         {
+          "name": "feeReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "strategy",
           "isMut": false,
           "isSigner": false
@@ -1180,10 +1131,6 @@ export const IDL: Cofi = {
         }
       ],
       "args": [
-        {
-          "name": "version",
-          "type": "u8"
-        },
         {
           "name": "activate",
           "type": "bool"
@@ -1397,7 +1344,7 @@ export const IDL: Cofi = {
           "isSigner": false
         },
         {
-          "name": "feeReceiverAccount",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         },
@@ -1423,60 +1370,6 @@ export const IDL: Cofi = {
           "type": "u64"
         }
       ]
-    },
-    {
-      "name": "withdrawAll",
-      "docs": [
-        "offboard all liquidity"
-      ],
-      "accounts": [
-        {
-          "name": "cofiAccountAuthority",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "sourceCofiAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "destinationLiquidityAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cofiMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cofiMintCollateralReserve",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "feeReceiverAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cofiStrategy",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cofiStrategyProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "clock",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
     },
     {
       "name": "stake",
@@ -1516,7 +1409,7 @@ export const IDL: Cofi = {
           "isSigner": false
         },
         {
-          "name": "feeReceiverAccount",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         },
@@ -1731,7 +1624,7 @@ export const IDL: Cofi = {
           "isSigner": true
         },
         {
-          "name": "cofiMint",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         }
@@ -1744,46 +1637,7 @@ export const IDL: Cofi = {
       ]
     },
     {
-      "name": "setFeeReceiver",
-      "docs": [
-        "change fee receiver"
-      ],
-      "accounts": [
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "mintAuthority",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "feeReceiver",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "feeReceiverAccount",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "cofiMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "transferCofiMintAuthority",
+      "name": "transferMintAuthority",
       "docs": [
         "change cofi mint authority"
       ],
@@ -1796,6 +1650,49 @@ export const IDL: Cofi = {
         {
           "name": "newAuthority",
           "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "cofiMint",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transferFeeReceiverAuthority",
+      "docs": [
+        "change cofi fee receiver authority"
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "newAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "cofiFeeReceiver",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeCofiMint",
+      "docs": [
+        "close cofi mint"
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
           "isSigner": true
         },
         {
@@ -1868,44 +1765,61 @@ export const IDL: Cofi = {
       }
     },
     {
-      "name": "cofiMint",
+      "name": "cofiFeeReceiver",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "version",
+            "name": "shareAmount",
             "docs": [
-              "cofi mint version"
+              "share_amount allocated to fee receiver"
             ],
-            "type": "u8"
+            "type": "u64"
           },
           {
-            "name": "bump",
+            "name": "rate",
             "docs": [
-              "`CofiMint` account pubkey pda bump"
-            ],
-            "type": "u8"
-          },
-          {
-            "name": "withdrawFeeRate",
-            "docs": [
-              "withdraw fee ppm"
+              "fee rate on interest generated"
             ],
             "type": "u32"
           },
           {
-            "name": "isActive",
+            "name": "authority",
             "docs": [
-              "all instructions that involve this `CofiMint` requires `is_active == true`"
+              "authority of fee receiver"
             ],
-            "type": "bool"
+            "type": "publicKey"
           },
+          {
+            "name": "extraSpace",
+            "type": {
+              "array": [
+                "u8",
+                512
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "cofiMint",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
             "name": "totalShares",
             "docs": [
               "total shares minted."
             ],
             "type": "u64"
+          },
+          {
+            "name": "authority",
+            "docs": [
+              "mint authority. any change to state requires authority signature."
+            ],
+            "type": "publicKey"
           },
           {
             "name": "liquidityReserve",
@@ -1926,13 +1840,6 @@ export const IDL: Cofi = {
             }
           },
           {
-            "name": "authority",
-            "docs": [
-              "mint authority. any change to state requires authority signature."
-            ],
-            "type": "publicKey"
-          },
-          {
             "name": "activeStrategy",
             "docs": [
               "strategy used for interest generation. pubkey for strategy account."
@@ -1940,18 +1847,25 @@ export const IDL: Cofi = {
             "type": "publicKey"
           },
           {
-            "name": "feeReceiver",
+            "name": "minSlotsElapsedForRateUpdate",
             "docs": [
-              "fee receiver authority"
+              "minimum slots elapsed to update exchange rate on strategy"
             ],
-            "type": "publicKey"
+            "type": "u64"
           },
           {
-            "name": "feeReceiverAccount",
+            "name": "bump",
             "docs": [
-              "fee receiver cofi account, the authority of which is `fee_receiver`."
+              "`CofiMint` account pubkey pda bump"
             ],
-            "type": "publicKey"
+            "type": "u8"
+          },
+          {
+            "name": "isActive",
+            "docs": [
+              "withdraw fee ppm"
+            ],
+            "type": "bool"
           },
           {
             "name": "extraSpace",
@@ -1970,13 +1884,6 @@ export const IDL: Cofi = {
       "type": {
         "kind": "struct",
         "fields": [
-          {
-            "name": "bump",
-            "docs": [
-              "pda bump"
-            ],
-            "type": "u8"
-          },
           {
             "name": "amount",
             "docs": [
@@ -2056,6 +1963,11 @@ export const IDL: Cofi = {
     {
       "name": "InitCofiAccountEvent",
       "fields": [
+        {
+          "name": "authority",
+          "type": "publicKey",
+          "index": false
+        },
         {
           "name": "publicKey",
           "type": "publicKey",

@@ -140,7 +140,7 @@ exports.IDL = {
                     "isSigner": false
                 },
                 {
-                    "name": "feeReceiverAccount",
+                    "name": "feeReceiver",
                     "isMut": true,
                     "isSigner": false
                 },
@@ -201,7 +201,7 @@ exports.IDL = {
                     "isSigner": false
                 },
                 {
-                    "name": "feeReceiverAccount",
+                    "name": "feeReceiver",
                     "isMut": true,
                     "isSigner": false
                 },

@@ -17,7 +17,7 @@ function initCofiAccountInstruction(cofiSolanaConfig, payer, authority, account)
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
+        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(cluster);
         return yield cofiProgram.methods.initCofiAcc()
             .accounts({
             initializer: payer,

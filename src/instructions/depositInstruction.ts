@@ -16,7 +16,7 @@ export async function depositInstruction(
   const cofiProgram = 
     new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
 
-  const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
+  const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
   const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
   

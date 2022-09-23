@@ -37,7 +37,7 @@ export async function getWithdrawableLiquidity(
     version, cluster, provider
   } = cofiSolanaConfig;
   let cofiAccount = await getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
-  if(cofiAccountPublicKey.equals(ACCOUNTS.COFI_FEE_RECEIVER(cluster))) {
+  if(cofiAccountPublicKey.equals(await ACCOUNTS.COFI_FEE_RECEIVER(cluster))) {
     return sharesToLiquidity(cofiSolanaConfig, cofiAccount.shareAmount)
   } else {
     let depositNstakes = cofiAccount.depositAmount.add(cofiAccount.stakeAmount);

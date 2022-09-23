@@ -20,7 +20,7 @@ function initTimerOwnedAccountInstruction(cofiSolanaConfig, payer, staker, benef
         const { version, cluster, provider } = cofiSolanaConfig;
         const cofiTimerProgram = new anchor_1.Program(types_1.cofiTimer.IDL, address_1.ACCOUNTS.COFI_TIMER_ID(cluster), provider);
         const cofiTimerAccount = yield (0, getCofiTimerAccount_1.getCofiTimerAddress)(cofiSolanaConfig, timerOwnedAccount);
-        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(version, cluster);
+        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(cluster);
         const strategy = yield address_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
         const collateralReserve = yield address_1.ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
         return yield cofiTimerProgram.methods.initTimerOwnedAccount(new anchor_1.BN(expiration), new anchor_1.BN(amount))

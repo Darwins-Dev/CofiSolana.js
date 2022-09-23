@@ -137,7 +137,7 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 },
                 {
-                    "name": "feeReceiverAccount";
+                    "name": "feeReceiver";
                     "isMut": true;
                     "isSigner": false;
                 },
@@ -198,7 +198,7 @@ export declare type CofiTimer = {
                     "isSigner": false;
                 },
                 {
-                    "name": "feeReceiverAccount";
+                    "name": "feeReceiver";
                     "isMut": true;
                     "isSigner": false;
                 },

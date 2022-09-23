@@ -12,7 +12,7 @@ export async function initAssociatedCofiAccountInstruction(
   } = cofiSolanaConfig;
   const cofiProgram = 
     new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-  const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
+  const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const [associatedCofiAccountAddress,] = await web3.PublicKey.findProgramAddress(
     [Buffer.from('cofi_account','utf-8'), authority.toBuffer(),],
     cofiProgram.programId,

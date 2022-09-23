@@ -137,7 +137,7 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "feeReceiverAccount",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         },
@@ -198,7 +198,7 @@ export type CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "feeReceiverAccount",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         },
@@ -416,7 +416,7 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "feeReceiverAccount",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         },
@@ -477,7 +477,7 @@ export const IDL: CofiTimer = {
           "isSigner": false
         },
         {
-          "name": "feeReceiverAccount",
+          "name": "feeReceiver",
           "isMut": true,
           "isSigner": false
         },

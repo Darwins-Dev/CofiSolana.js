@@ -10,7 +10,7 @@ export async function getCofiMintAccount(
   } = cofiSolanaConfig;
   const cofiProgram = 
     new Program<cofi.Cofi>(cofi.IDL, ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-  return cofiProgram.account.cofiMint.fetch(await ACCOUNTS.COFI_MINT(version, cluster));
+  return cofiProgram.account.cofiMint.fetch(await ACCOUNTS.COFI_MINT(cluster));
 }
 
 export async function getCofiMintAddress(

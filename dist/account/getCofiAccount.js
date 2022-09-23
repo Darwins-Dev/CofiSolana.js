@@ -35,7 +35,7 @@ function getWithdrawableLiquidity(cofiSolanaConfig, cofiAccountPublicKey, withdr
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         let cofiAccount = yield getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
-        if (cofiAccountPublicKey.equals(address_1.ACCOUNTS.COFI_FEE_RECEIVER(cluster))) {
+        if (cofiAccountPublicKey.equals(yield address_1.ACCOUNTS.COFI_FEE_RECEIVER(cluster))) {
             return (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount);
         }
         else {

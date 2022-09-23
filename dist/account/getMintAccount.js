@@ -17,7 +17,7 @@ function getCofiMintAccount(cofiSolanaConfig) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
-        return cofiProgram.account.cofiMint.fetch(yield address_1.ACCOUNTS.COFI_MINT(version, cluster));
+        return cofiProgram.account.cofiMint.fetch(yield address_1.ACCOUNTS.COFI_MINT(cluster));
     });
 }
 exports.getCofiMintAccount = getCofiMintAccount;

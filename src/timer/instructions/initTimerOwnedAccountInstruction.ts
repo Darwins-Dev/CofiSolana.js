@@ -20,7 +20,7 @@ export async function initTimerOwnedAccountInstruction(
   } = cofiSolanaConfig;
   const cofiTimerProgram = new Program<cofiTimer.CofiTimer>(cofiTimer.IDL, ACCOUNTS.COFI_TIMER_ID(cluster), provider);
   const cofiTimerAccount = await getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccount);
-  const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
+  const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
   const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
 

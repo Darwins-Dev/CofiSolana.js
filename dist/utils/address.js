@@ -22,9 +22,9 @@ exports.DEVNET_SOL_MINT = new anchor_1.web3.PublicKey("So11111111111111111111111
 exports.DEVNET_SOL_RESERVE = new anchor_1.web3.PublicKey("5VVLD7BQp8y3bTgyF5ezm1ResyMTR3PhYsT4iHFU8Sxz");
 exports.DEVNET_SOL_CTOKEN = new anchor_1.web3.PublicKey("FzwZWRMc3GCqjSrcpVX3ueJc6UpcV6iWWb7ZMsTXE3Gf");
 exports.DEVNET_SOL_RESERVE_LIQ_SUPPLY = new anchor_1.web3.PublicKey("furd3XUtjXZ2gRvSsoUts9A5m8cMJNqdsyR2Rt8vY9s");
-exports.DEVNET_SIMP_MINT = new anchor_1.web3.PublicKey("8HFjaos5KaoP25VU3XAnHxacymHV2qEcM95Kw7RKJetn");
-exports.DEVNET_SIMP_CTOKEN = new anchor_1.web3.PublicKey("DHrXwJAeCZmwpV2FbrQ2HerC2Jo8ZhBZeLJkpiPgEr2G");
-exports.DEVNET_SIMP_LIQ_SUPPLY = new anchor_1.web3.PublicKey("Bpy8EA7SLCbkppEHWfXTCwNzdYePjH5rm7sPsmdN7a95");
+exports.DEVNET_SIMP_MINT = new anchor_1.web3.PublicKey("8xGPSDNuXMmSmBpNGot6MDRPGteBpFevCPgM26MfrpCx");
+exports.DEVNET_SIMP_CTOKEN = new anchor_1.web3.PublicKey("4cjJuRxYdwWgXHwec5e3zaXpAjutvtcphGjMu31zE5Uc");
+exports.DEVNET_SIMP_LIQ_SUPPLY = new anchor_1.web3.PublicKey("3zxdUBXbMRpsACGCQFLYdP2izZ561JLN2VDZTUoNdYpz");
 exports.DEVNET_COFI_SOL = new anchor_1.web3.PublicKey("2Xi8qBg2T66Q6SDoLq4mwU7wW3Yf4SAFZRocD2nZdzAe");
 exports.DEVNET_COFI_STRATEGY_SOL = new anchor_1.web3.PublicKey("9MKNtecXPBb6WxF36fhDDX1tBqTe4LeuCYfkgmUUkpaq");
 exports.DEVNET_COFI_SIMP = new anchor_1.web3.PublicKey("BLG2ZfiVKRWtcy1aqAjeUFabRtkRA7y7HsBmodfyh6gh");
@@ -110,14 +110,6 @@ exports.ACCOUNTS = {
                 return exports.MAINNET_USDC_MINT;
         }
     },
-    COFI_FEE_RECEIVER: (cluster) => {
-        switch (cluster) {
-            case "devnet":
-            case "simp":
-            case "mainnet":
-                return exports.DEVNET_COFI_SIMP_FEE_RECEIVER;
-        }
-    },
     COFI_PROGRAM_ID: (cluster) => {
         switch (cluster) {
             case "devnet":
@@ -147,8 +139,11 @@ exports.ACCOUNTS = {
                 return exports.MAINNET_COFI_STRATEGY_USDC;
         }
     },
-    COFI_MINT: (version, cluster) => __awaiter(void 0, void 0, void 0, function* () {
-        return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_mint', 'utf-8'), Uint8Array.from([version, 0, 0, 0, 0, 0, 0, 0, 0])], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
+    COFI_MINT: (cluster) => __awaiter(void 0, void 0, void 0, function* () {
+        return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_mint', 'utf-8'), exports.ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
+    }),
+    COFI_FEE_RECEIVER: (cluster) => __awaiter(void 0, void 0, void 0, function* () {
+        return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_fee_receiver', 'utf-8'), (yield exports.ACCOUNTS.COFI_MINT(cluster)).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     }),
     COFI_STRATEGY: (version, cluster) => __awaiter(void 0, void 0, void 0, function* () {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([
@@ -159,12 +154,12 @@ exports.ACCOUNTS = {
     }),
     COFI_COLLATERAL_RESERVE: (version, cluster) => __awaiter(void 0, void 0, void 0, function* () {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_collateral_reserve', 'utf-8'),
-            (yield exports.ACCOUNTS.COFI_MINT(version, cluster)).toBuffer(),
+            (yield exports.ACCOUNTS.COFI_MINT(cluster)).toBuffer(),
             exports.ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     }),
     COFI_LIQUIDITY_RESERVE: (version, cluster) => __awaiter(void 0, void 0, void 0, function* () {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_liquidity_reserve', 'utf-8'),
-            (yield exports.ACCOUNTS.COFI_MINT(version, cluster)).toBuffer(),
+            (yield exports.ACCOUNTS.COFI_MINT(cluster)).toBuffer(),
             exports.ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     }),
 };

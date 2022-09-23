@@ -36,29 +36,40 @@ export declare function getStakeAccount(cofiSolanaConfig: CofiSolanaConfig, publ
         }];
     };
 } | {
+    name: "cofiFeeReceiver";
+    type: {
+        kind: "struct";
+        fields: [{
+            name: "shareAmount";
+            docs: ["share_amount allocated to fee receiver"];
+            type: "u64";
+        }, {
+            name: "rate";
+            docs: ["fee rate on interest generated"];
+            type: "u32";
+        }, {
+            name: "authority";
+            docs: ["authority of fee receiver"];
+            type: "publicKey";
+        }, {
+            name: "extraSpace";
+            type: {
+                array: ["u8", 512];
+            };
+        }];
+    };
+} | {
     name: "cofiMint";
     type: {
         kind: "struct";
         fields: [{
-            name: "version";
-            docs: ["cofi mint version"];
-            type: "u8";
-        }, {
-            name: "bump";
-            docs: ["`CofiMint` account pubkey pda bump"];
-            type: "u8";
-        }, {
-            name: "withdrawFeeRate";
-            docs: ["withdraw fee ppm"];
-            type: "u32";
-        }, {
-            name: "isActive";
-            docs: ["all instructions that involve this `CofiMint` requires `is_active == true`"];
-            type: "bool";
-        }, {
             name: "totalShares";
             docs: ["total shares minted."];
             type: "u64";
+        }, {
+            name: "authority";
+            docs: ["mint authority. any change to state requires authority signature."];
+            type: "publicKey";
         }, {
             name: "liquidityReserve";
             docs: ["liquidity reserve. holds liquidity owned by this `CofiMint`"];
@@ -72,21 +83,21 @@ export declare function getStakeAccount(cofiSolanaConfig: CofiSolanaConfig, publ
                 defined: "SplReserve";
             };
         }, {
-            name: "authority";
-            docs: ["mint authority. any change to state requires authority signature."];
-            type: "publicKey";
-        }, {
             name: "activeStrategy";
             docs: ["strategy used for interest generation. pubkey for strategy account."];
             type: "publicKey";
         }, {
-            name: "feeReceiver";
-            docs: ["fee receiver authority"];
-            type: "publicKey";
+            name: "minSlotsElapsedForRateUpdate";
+            docs: ["minimum slots elapsed to update exchange rate on strategy"];
+            type: "u64";
         }, {
-            name: "feeReceiverAccount";
-            docs: ["fee receiver cofi account, the authority of which is `fee_receiver`."];
-            type: "publicKey";
+            name: "bump";
+            docs: ["`CofiMint` account pubkey pda bump"];
+            type: "u8";
+        }, {
+            name: "isActive";
+            docs: ["withdraw fee ppm"];
+            type: "bool";
         }, {
             name: "extraSpace";
             type: {
@@ -99,10 +110,6 @@ export declare function getStakeAccount(cofiSolanaConfig: CofiSolanaConfig, publ
     type: {
         kind: "struct";
         fields: [{
-            name: "bump";
-            docs: ["pda bump"];
-            type: "u8";
-        }, {
             name: "amount";
             docs: ["liquidity staked by staker to beneficiary"];
             type: "u64";

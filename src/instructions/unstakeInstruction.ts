@@ -18,7 +18,7 @@ export async function unstakeInstruction(
     Buffer.from("cofi_stake", 'utf-8'), staker.toBuffer(), beneficiary.toBuffer(),
   ], cofiProgram.programId);
 
-  const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
+  const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
 
   return await cofiProgram.methods.unstake(new BN(amount))

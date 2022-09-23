@@ -15,9 +15,10 @@ export async function collectDepositInstruction(
   } = cofiSolanaConfig;
   const cofiTimerProgram = new Program<cofiTimer.CofiTimer>(cofiTimer.IDL, ACCOUNTS.COFI_TIMER_ID(cluster), provider);
   const cofiTimerAccount = await getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccount);
-  const cofiMint = await ACCOUNTS.COFI_MINT(version, cluster);
+  const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
   const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
+  const feeReceiver = await ACCOUNTS.COFI_FEE_RECEIVER(cluster);
 
   const cofiTimerAccountState = await getCofiTimerAccount(cofiSolanaConfig, cofiTimerAccount);
   const stakerAccount = cofiTimerAccountState.stakerAccount;
@@ -35,7 +36,7 @@ export async function collectDepositInstruction(
       cofiMintCollateralReserve: collateralReserve,
       cofiMint,
       cofiStrategy: strategy,
-      feeReceiverAccount: ACCOUNTS.COFI_FEE_RECEIVER(cluster),
+      feeReceiver,
       cofiProgram: ACCOUNTS.COFI_PROGRAM_ID(cluster),
       cofiStrategyProgram: ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster),
       clock: web3.SYSVAR_CLOCK_PUBKEY,
