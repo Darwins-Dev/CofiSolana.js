@@ -154,12 +154,10 @@ exports.ACCOUNTS = {
     }),
     COFI_COLLATERAL_RESERVE: (version, cluster) => __awaiter(void 0, void 0, void 0, function* () {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_collateral_reserve', 'utf-8'),
-            (yield exports.ACCOUNTS.COFI_MINT(cluster)).toBuffer(),
             exports.ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     }),
     COFI_LIQUIDITY_RESERVE: (version, cluster) => __awaiter(void 0, void 0, void 0, function* () {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_liquidity_reserve', 'utf-8'),
-            (yield exports.ACCOUNTS.COFI_MINT(cluster)).toBuffer(),
             exports.ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     }),
 };

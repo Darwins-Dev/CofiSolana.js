@@ -161,14 +161,12 @@ export const ACCOUNTS = {
   COFI_COLLATERAL_RESERVE: async(version: number, cluster: ClusterType): Promise<web3.PublicKey> => {
     return (await web3.PublicKey.findProgramAddress(
       [Buffer.from('cofi_collateral_reserve', 'utf-8'), 
-        (await ACCOUNTS.COFI_MINT(cluster)).toBuffer(), 
         ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer()],
         ACCOUNTS.COFI_PROGRAM_ID(cluster),))[0];
   },
   COFI_LIQUIDITY_RESERVE: async(version: number, cluster: ClusterType): Promise<web3.PublicKey> => {
     return (await web3.PublicKey.findProgramAddress(
       [Buffer.from('cofi_liquidity_reserve', 'utf-8'), 
-        (await ACCOUNTS.COFI_MINT(cluster)).toBuffer(), 
         ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()],
         ACCOUNTS.COFI_PROGRAM_ID(cluster),))[0];
   },
