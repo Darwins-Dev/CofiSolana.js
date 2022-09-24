@@ -22,12 +22,11 @@ function getCofiAccount(cofiSolanaConfig, publicKey) {
     });
 }
 exports.getCofiAccount = getCofiAccount;
-function getAssociatedCofiAccountAddress(cofiSolanaConfig, owner) {
+function getAssociatedCofiAccountAddress(cofiSolanaConfig, authority) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
-        return (yield anchor_1.web3.PublicKey.findProgramAddress([
-            Buffer.from('cofi_account', 'utf-8'), owner.toBuffer(),
-        ], address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
+        const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(cluster);
+        return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_account', 'utf-8'), cofiMint.toBuffer(), authority.toBuffer(),], address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     });
 }
 exports.getAssociatedCofiAccountAddress = getAssociatedCofiAccountAddress;

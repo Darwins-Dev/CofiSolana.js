@@ -17,14 +17,15 @@ export async function getCofiAccount(
 
 export async function getAssociatedCofiAccountAddress(
   cofiSolanaConfig: CofiSolanaConfig,
-  owner: web3.PublicKey,
+  authority: web3.PublicKey,
 ): Promise<web3.PublicKey> {
   const {
     version, cluster, provider
   } = cofiSolanaConfig;
-  return (await web3.PublicKey.findProgramAddress([
-      Buffer.from('cofi_account', 'utf-8'), owner.toBuffer(),
-    ], ACCOUNTS.COFI_PROGRAM_ID(cluster)
+  const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
+  return (await web3.PublicKey.findProgramAddress(
+    [Buffer.from('cofi_account','utf-8'), cofiMint.toBuffer(), authority.toBuffer(),], 
+    ACCOUNTS.COFI_PROGRAM_ID(cluster)
   ))[0]
 }
 

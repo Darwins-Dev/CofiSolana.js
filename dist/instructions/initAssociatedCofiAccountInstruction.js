@@ -18,7 +18,7 @@ function initAssociatedCofiAccountInstruction(cofiSolanaConfig, payer, authority
         const { version, cluster, provider } = cofiSolanaConfig;
         const cofiProgram = new anchor_1.Program(types_1.cofi.IDL, address_1.ACCOUNTS.COFI_PROGRAM_ID(cluster), provider);
         const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(cluster);
-        const [associatedCofiAccountAddress,] = yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_account', 'utf-8'), authority.toBuffer(),], cofiProgram.programId);
+        const [associatedCofiAccountAddress,] = yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_account', 'utf-8'), cofiMint.toBuffer(), authority.toBuffer(),], cofiProgram.programId);
         return yield cofiProgram.methods.initAssociatedCofiAcc()
             .accounts({
             initializer: payer,

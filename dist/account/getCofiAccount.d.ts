@@ -133,6 +133,6 @@ export declare function getCofiAccount(cofiSolanaConfig: CofiSolanaConfig, publi
         }];
     };
 }, import("@project-serum/anchor").IdlTypes<cofi.Cofi>>>;
-export declare function getAssociatedCofiAccountAddress(cofiSolanaConfig: CofiSolanaConfig, owner: web3.PublicKey): Promise<web3.PublicKey>;
+export declare function getAssociatedCofiAccountAddress(cofiSolanaConfig: CofiSolanaConfig, authority: web3.PublicKey): Promise<web3.PublicKey>;
 export declare function getWithdrawableLiquidity(cofiSolanaConfig: CofiSolanaConfig, cofiAccountPublicKey: web3.PublicKey, withdrawFeeRate: BN | number | string): Promise<BN>;
 export declare function getInterestGenerated(cofiSolanaConfig: CofiSolanaConfig, cofiAccountPublicKey: web3.PublicKey): Promise<BN>;
