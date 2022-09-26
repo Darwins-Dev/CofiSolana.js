@@ -19,7 +19,7 @@ exports.IDL = {
                 {
                     "name": "authority",
                     "isMut": false,
-                    "isSigner": true
+                    "isSigner": false
                 },
                 {
                     "name": "cofiMint",
@@ -97,7 +97,7 @@ exports.IDL = {
                 {
                     "name": "authority",
                     "isMut": false,
-                    "isSigner": true
+                    "isSigner": false
                 },
                 {
                     "name": "account",
@@ -136,7 +136,7 @@ exports.IDL = {
                 {
                     "name": "authority",
                     "isMut": false,
-                    "isSigner": true
+                    "isSigner": false
                 },
                 {
                     "name": "account",
@@ -429,6 +429,30 @@ exports.IDL = {
             ]
         },
         {
+            "name": "mergeAccounts",
+            "docs": [
+                "merge accounts instruction"
+            ],
+            "accounts": [
+                {
+                    "name": "sourceAccountAuthority",
+                    "isMut": false,
+                    "isSigner": true
+                },
+                {
+                    "name": "sourceCofiAccount",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "destinationCofiAccount",
+                    "isMut": true,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        },
+        {
             "name": "transferStakerAuthority",
             "docs": [
                 "transfer stake amount instruction"
@@ -484,17 +508,7 @@ exports.IDL = {
                     "isSigner": true
                 },
                 {
-                    "name": "beneficiaryAccountAuthority",
-                    "isMut": false,
-                    "isSigner": true
-                },
-                {
                     "name": "stakerCofiAccount",
-                    "isMut": false,
-                    "isSigner": false
-                },
-                {
-                    "name": "beneficiaryCofiAccount",
                     "isMut": false,
                     "isSigner": false
                 },
@@ -592,7 +606,7 @@ exports.IDL = {
                 {
                     "name": "newAuthority",
                     "isMut": false,
-                    "isSigner": true
+                    "isSigner": false
                 },
                 {
                     "name": "cofiMint",
@@ -616,7 +630,7 @@ exports.IDL = {
                 {
                     "name": "newAuthority",
                     "isMut": false,
-                    "isSigner": true
+                    "isSigner": false
                 },
                 {
                     "name": "cofiFeeReceiver",
@@ -625,6 +639,60 @@ exports.IDL = {
                 }
             ],
             "args": []
+        },
+        {
+            "name": "collectFee",
+            "docs": [
+                "collect from fee receiver"
+            ],
+            "accounts": [
+                {
+                    "name": "authority",
+                    "isMut": false,
+                    "isSigner": true
+                },
+                {
+                    "name": "feeReceiver",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "destinationLiquidityAccount",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiMint",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiMintCollateralReserve",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiStrategy",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "cofiStrategyProgram",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "clock",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": [
+                {
+                    "name": "liquidityAmount",
+                    "type": "u64"
+                }
+            ]
         },
         {
             "name": "closeCofiMint",

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCofiMintAddress = exports.getCofiMintAccount = void 0;
+exports.getCofiMintAccount = void 0;
 const address_1 = require("../utils/address");
 const types_1 = require("../types");
 const anchor_1 = require("@project-serum/anchor");
@@ -21,14 +21,3 @@ function getCofiMintAccount(cofiSolanaConfig) {
     });
 }
 exports.getCofiMintAccount = getCofiMintAccount;
-function getCofiMintAddress(cofiSolanaConfig) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const { version, cluster, provider } = cofiSolanaConfig;
-        return (yield anchor_1.web3.PublicKey.findProgramAddress([
-            Buffer.from('cofi_strategy', 'utf-8'),
-            address_1.ACCOUNTS.SOLEND_PROGRAM_ID(cluster).toBuffer(),
-            Uint8Array.from([version, 0, 0, 0, 0, 0, 0, 0, 0]),
-        ], address_1.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster)))[0];
-    });
-}
-exports.getCofiMintAddress = getCofiMintAddress;

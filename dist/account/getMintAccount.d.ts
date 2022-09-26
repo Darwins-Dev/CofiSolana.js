@@ -1,5 +1,4 @@
 import { cofi, CofiSolanaConfig } from '../types';
-import { web3 } from '@project-serum/anchor';
 export declare function getCofiMintAccount(cofiSolanaConfig: CofiSolanaConfig): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
     name: "cofiAccount";
     type: {
@@ -133,4 +132,3 @@ export declare function getCofiMintAccount(cofiSolanaConfig: CofiSolanaConfig): 
         }];
     };
 }, import("@project-serum/anchor").IdlTypes<cofi.Cofi>>>;
-export declare function getCofiMintAddress(cofiSolanaConfig: CofiSolanaConfig): Promise<web3.PublicKey>;
