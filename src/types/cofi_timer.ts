@@ -274,6 +274,58 @@ export type CofiTimer = {
         ]
       }
     }
+  ],
+  "events": [
+    {
+      "name": "TimedStakeEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "expiration",
+          "type": "i64",
+          "index": false
+        },
+        {
+          "name": "timerAccount",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "WithdrawDepositEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "timerAccount",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "WithdrawInterestEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "timerAccount",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    }
   ]
 };
 
@@ -552,6 +604,58 @@ export const IDL: CofiTimer = {
           }
         ]
       }
+    }
+  ],
+  "events": [
+    {
+      "name": "TimedStakeEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "expiration",
+          "type": "i64",
+          "index": false
+        },
+        {
+          "name": "timerAccount",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "WithdrawDepositEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "timerAccount",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "WithdrawInterestEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "timerAccount",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
     }
   ]
 };
