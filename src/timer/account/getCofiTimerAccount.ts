@@ -1,6 +1,7 @@
 import { ACCOUNTS, } from '../../utils/address';
 import { cofiTimer, CofiSolanaConfig } from '../../types';
 import { web3, Program, BN, } from '@project-serum/anchor';
+import { getCofiAccount, getWithdrawableLiquidity } from '../..';
 
 export async function getCofiTimerAccount(
   cofiSolanaConfig: CofiSolanaConfig,
@@ -23,4 +24,21 @@ export async function getCofiTimerAddress(
   return (await web3.PublicKey.findProgramAddress([
     Buffer.from('cofi_timer', 'utf-8'), timerOwnedAccountPublicKey.toBuffer(),
   ], ACCOUNTS.COFI_TIMER_ID(cluster)))[0]
+}
+
+export async function getCollectableInterest(
+  cofiSolanaConfig: CofiSolanaConfig,
+  timerOwnedAccountPublicKey: web3.PublicKey,
+  withdrawFeeRate: BN,
+): Promise<BN> {
+  const {
+    version, cluster, provider,
+  } = cofiSolanaConfig;
+  const cofiTimerAccount = await getCofiTimerAccount(cofiSolanaConfig, await getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccountPublicKey));
+  const withdrawableLiquidity = await getWithdrawableLiquidity(cofiSolanaConfig, timerOwnedAccountPublicKey, withdrawFeeRate);
+  if(cofiTimerAccount.depositCollected) {
+    return withdrawableLiquidity
+  } else {
+    return withdrawableLiquidity.sub(cofiTimerAccount.amount)
+  }
 }
