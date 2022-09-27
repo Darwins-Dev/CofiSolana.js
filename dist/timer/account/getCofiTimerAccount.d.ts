@@ -1,5 +1,5 @@
 import { cofiTimer, CofiSolanaConfig } from '../../types';
-import { web3 } from '@project-serum/anchor';
+import { web3, BN } from '@project-serum/anchor';
 export declare function getCofiTimerAccount(cofiSolanaConfig: CofiSolanaConfig, publicKey: web3.PublicKey): Promise<import("@project-serum/anchor/dist/cjs/program/namespace/types").TypeDef<{
     name: "cofiTimer";
     docs: ["holds maturity date, the staker, the cofi-account that will temporarily holds shares, and eventual beneficiary of the generated interest"];
@@ -38,3 +38,4 @@ export declare function getCofiTimerAccount(cofiSolanaConfig: CofiSolanaConfig, 
     };
 }, import("@project-serum/anchor").IdlTypes<cofiTimer.CofiTimer>>>;
 export declare function getCofiTimerAddress(cofiSolanaConfig: CofiSolanaConfig, timerOwnedAccountPublicKey: web3.PublicKey): Promise<web3.PublicKey>;
+export declare function getCollectableInterest(cofiSolanaConfig: CofiSolanaConfig, timerOwnedAccountPublicKey: web3.PublicKey, withdrawFeeRate: BN): Promise<BN>;

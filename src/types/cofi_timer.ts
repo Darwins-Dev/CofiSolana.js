@@ -277,48 +277,8 @@ export type CofiTimer = {
   ],
   "events": [
     {
-      "name": "TimedStakeEvent",
+      "name": "CofiTimerEvent",
       "fields": [
-        {
-          "name": "amount",
-          "type": "u64",
-          "index": false
-        },
-        {
-          "name": "expiration",
-          "type": "i64",
-          "index": false
-        },
-        {
-          "name": "timerAccount",
-          "type": "publicKey",
-          "index": false
-        }
-      ]
-    },
-    {
-      "name": "WithdrawDepositEvent",
-      "fields": [
-        {
-          "name": "amount",
-          "type": "u64",
-          "index": false
-        },
-        {
-          "name": "timerAccount",
-          "type": "publicKey",
-          "index": false
-        }
-      ]
-    },
-    {
-      "name": "WithdrawInterestEvent",
-      "fields": [
-        {
-          "name": "amount",
-          "type": "u64",
-          "index": false
-        },
         {
           "name": "timerAccount",
           "type": "publicKey",
@@ -608,48 +568,8 @@ export const IDL: CofiTimer = {
   ],
   "events": [
     {
-      "name": "TimedStakeEvent",
+      "name": "CofiTimerEvent",
       "fields": [
-        {
-          "name": "amount",
-          "type": "u64",
-          "index": false
-        },
-        {
-          "name": "expiration",
-          "type": "i64",
-          "index": false
-        },
-        {
-          "name": "timerAccount",
-          "type": "publicKey",
-          "index": false
-        }
-      ]
-    },
-    {
-      "name": "WithdrawDepositEvent",
-      "fields": [
-        {
-          "name": "amount",
-          "type": "u64",
-          "index": false
-        },
-        {
-          "name": "timerAccount",
-          "type": "publicKey",
-          "index": false
-        }
-      ]
-    },
-    {
-      "name": "WithdrawInterestEvent",
-      "fields": [
-        {
-          "name": "amount",
-          "type": "u64",
-          "index": false
-        },
         {
           "name": "timerAccount",
           "type": "publicKey",

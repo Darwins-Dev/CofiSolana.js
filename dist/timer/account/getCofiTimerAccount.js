@@ -9,10 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCofiTimerAddress = exports.getCofiTimerAccount = void 0;
+exports.getCollectableInterest = exports.getCofiTimerAddress = exports.getCofiTimerAccount = void 0;
 const address_1 = require("../../utils/address");
 const types_1 = require("../../types");
 const anchor_1 = require("@project-serum/anchor");
+const __1 = require("../..");
 function getCofiTimerAccount(cofiSolanaConfig, publicKey) {
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
@@ -30,3 +31,17 @@ function getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccountPublicKey) {
     });
 }
 exports.getCofiTimerAddress = getCofiTimerAddress;
+function getCollectableInterest(cofiSolanaConfig, timerOwnedAccountPublicKey, withdrawFeeRate) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { version, cluster, provider, } = cofiSolanaConfig;
+        const cofiTimerAccount = yield getCofiTimerAccount(cofiSolanaConfig, yield getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccountPublicKey));
+        const withdrawableLiquidity = yield (0, __1.getWithdrawableLiquidity)(cofiSolanaConfig, timerOwnedAccountPublicKey, withdrawFeeRate);
+        if (cofiTimerAccount.depositCollected) {
+            return withdrawableLiquidity;
+        }
+        else {
+            return withdrawableLiquidity.sub(cofiTimerAccount.amount);
+        }
+    });
+}
+exports.getCollectableInterest = getCollectableInterest;
