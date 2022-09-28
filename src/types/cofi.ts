@@ -71,6 +71,10 @@ export type Cofi = {
       ],
       "args": [
         {
+          "name": "initialShares",
+          "type": "u64"
+        },
+        {
           "name": "activate",
           "type": "bool"
         },
@@ -854,13 +858,6 @@ export type Cofi = {
             "type": "publicKey"
           },
           {
-            "name": "minSlotsElapsedForRateUpdate",
-            "docs": [
-              "minimum slots elapsed to update exchange rate on strategy"
-            ],
-            "type": "u64"
-          },
-          {
             "name": "bump",
             "docs": [
               "`CofiMint` account pubkey pda bump"
@@ -868,11 +865,25 @@ export type Cofi = {
             "type": "u8"
           },
           {
+            "name": "initializer",
+            "docs": [
+              "initializer address"
+            ],
+            "type": "publicKey"
+          },
+          {
             "name": "isActive",
             "docs": [
               "withdraw fee ppm"
             ],
             "type": "bool"
+          },
+          {
+            "name": "minSlotsElapsedForRateUpdate",
+            "docs": [
+              "minimum slots elapsed to update exchange rate on strategy"
+            ],
+            "type": "u64"
           },
           {
             "name": "extraSpace",
@@ -1200,6 +1211,10 @@ export const IDL: Cofi = {
       ],
       "args": [
         {
+          "name": "initialShares",
+          "type": "u64"
+        },
+        {
           "name": "activate",
           "type": "bool"
         },
@@ -1983,13 +1998,6 @@ export const IDL: Cofi = {
             "type": "publicKey"
           },
           {
-            "name": "minSlotsElapsedForRateUpdate",
-            "docs": [
-              "minimum slots elapsed to update exchange rate on strategy"
-            ],
-            "type": "u64"
-          },
-          {
             "name": "bump",
             "docs": [
               "`CofiMint` account pubkey pda bump"
@@ -1997,11 +2005,25 @@ export const IDL: Cofi = {
             "type": "u8"
           },
           {
+            "name": "initializer",
+            "docs": [
+              "initializer address"
+            ],
+            "type": "publicKey"
+          },
+          {
             "name": "isActive",
             "docs": [
               "withdraw fee ppm"
             ],
             "type": "bool"
+          },
+          {
+            "name": "minSlotsElapsedForRateUpdate",
+            "docs": [
+              "minimum slots elapsed to update exchange rate on strategy"
+            ],
+            "type": "u64"
           },
           {
             "name": "extraSpace",

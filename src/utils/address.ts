@@ -1,6 +1,8 @@
 import { web3 } from '@project-serum/anchor';
 import { ClusterType } from '../types';
 
+export const DEVNET_INITIALIZER = new web3.PublicKey("12T6Vum2gmgRzYqcQVDkUD3nR9zQ5Ub5Bb8zPBM4KjHa");
+
 export const DEVNET_PROGRAM_ID = new web3.PublicKey("ALend7Ketfx5bxh6ghsCDXAoDrhvEmsXT3cynB6aPLgx");
 export const DEVNET_LENDING_MARKET = new web3.PublicKey("GvjoVKNjBvQcFaSKUW1gTE7DxhSpjHbE69umVR5nPuQp");
 export const DEVNET_LENDING_MARKET_AUTH = new web3.PublicKey("EhJ4fwaXUp7aiwvZThSUaGWCaBQAJe3AEaJJJVCn3UCK");
@@ -15,9 +17,9 @@ export const DEVNET_SOL_RESERVE = new web3.PublicKey("5VVLD7BQp8y3bTgyF5ezm1Resy
 export const DEVNET_SOL_CTOKEN = new web3.PublicKey("FzwZWRMc3GCqjSrcpVX3ueJc6UpcV6iWWb7ZMsTXE3Gf");
 export const DEVNET_SOL_RESERVE_LIQ_SUPPLY = new web3.PublicKey("furd3XUtjXZ2gRvSsoUts9A5m8cMJNqdsyR2Rt8vY9s");
 
-export const DEVNET_SIMP_MINT = new web3.PublicKey("8xGPSDNuXMmSmBpNGot6MDRPGteBpFevCPgM26MfrpCx");
-export const DEVNET_SIMP_CTOKEN = new web3.PublicKey("4cjJuRxYdwWgXHwec5e3zaXpAjutvtcphGjMu31zE5Uc");
-export const DEVNET_SIMP_LIQ_SUPPLY = new web3.PublicKey("3zxdUBXbMRpsACGCQFLYdP2izZ561JLN2VDZTUoNdYpz");
+export const DEVNET_SIMP_MINT = new web3.PublicKey("9q5uafWGSszbRxSz7R9gTFnzgwNhwf9XzJRdukkbo3eW");
+export const DEVNET_SIMP_CTOKEN = new web3.PublicKey("F8zgkjUbKkTQf2bWryvZJr6VCEbSXUGSSR6stzQ1sNAu");
+export const DEVNET_SIMP_LIQ_SUPPLY = new web3.PublicKey("C2VSqhnREkvUsJmoSFeuWWagofWPMxUNx3ndTvujYPvM");
 
 export const DEVNET_COFI_SOL = new web3.PublicKey("2Xi8qBg2T66Q6SDoLq4mwU7wW3Yf4SAFZRocD2nZdzAe");
 export const DEVNET_COFI_STRATEGY_SOL = new web3.PublicKey("9MKNtecXPBb6WxF36fhDDX1tBqTe4LeuCYfkgmUUkpaq");
@@ -141,7 +143,7 @@ export const ACCOUNTS = {
   },
   COFI_MINT: async (cluster: ClusterType): Promise<web3.PublicKey> => {
     return (await web3.PublicKey.findProgramAddress(
-      [Buffer.from('cofi_mint', 'utf-8'), ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()],
+      [Buffer.from('cofi_mint', 'utf-8'), ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer(), DEVNET_INITIALIZER.toBuffer()],
       ACCOUNTS.COFI_PROGRAM_ID(cluster)
     ))[0];
   },
@@ -158,16 +160,18 @@ export const ACCOUNTS = {
       Uint8Array.from([version, 0, 0, 0, 0, 0, 0, 0, 0]),
     ], ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster)))[0]
   },
-  COFI_COLLATERAL_RESERVE: async(version: number, cluster: ClusterType): Promise<web3.PublicKey> => {
+  COFI_COLLATERAL_RESERVE: async(cluster: ClusterType): Promise<web3.PublicKey> => {
     return (await web3.PublicKey.findProgramAddress(
       [Buffer.from('cofi_collateral_reserve', 'utf-8'), 
-        ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer()],
+        ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer(),
+        (await ACCOUNTS.COFI_MINT(cluster)).toBuffer(),],
         ACCOUNTS.COFI_PROGRAM_ID(cluster),))[0];
   },
-  COFI_LIQUIDITY_RESERVE: async(version: number, cluster: ClusterType): Promise<web3.PublicKey> => {
+  COFI_LIQUIDITY_RESERVE: async(cluster: ClusterType): Promise<web3.PublicKey> => {
     return (await web3.PublicKey.findProgramAddress(
       [Buffer.from('cofi_liquidity_reserve', 'utf-8'), 
-        ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()],
+        ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer(),
+        (await ACCOUNTS.COFI_MINT(cluster)).toBuffer(),],
         ACCOUNTS.COFI_PROGRAM_ID(cluster),))[0];
   },
 }

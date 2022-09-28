@@ -23,7 +23,7 @@ function collectDepositInstruction(cofiSolanaConfig, timerOwnedAccount, destinat
         const cofiTimerAccount = yield (0, getCofiTimerAccount_1.getCofiTimerAddress)(cofiSolanaConfig, timerOwnedAccount);
         const cofiMint = yield address_1.ACCOUNTS.COFI_MINT(cluster);
         const strategy = yield address_1.ACCOUNTS.COFI_STRATEGY(version, cluster);
-        const collateralReserve = yield address_1.ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
+        const collateralReserve = yield address_1.ACCOUNTS.COFI_COLLATERAL_RESERVE(cluster);
         const feeReceiver = yield address_1.ACCOUNTS.COFI_FEE_RECEIVER(cluster);
         const cofiTimerAccountState = yield (0, getCofiTimerAccount_1.getCofiTimerAccount)(cofiSolanaConfig, cofiTimerAccount);
         const stakerAccount = cofiTimerAccountState.stakerAccount;

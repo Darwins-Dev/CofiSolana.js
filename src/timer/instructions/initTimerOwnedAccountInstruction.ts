@@ -22,7 +22,7 @@ export async function initTimerOwnedAccountInstruction(
   const cofiTimerAccount = await getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccount);
   const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
-  const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
+  const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(cluster);
 
   return await cofiTimerProgram.methods.initTimerOwnedAccount(new BN(expiration), new BN(amount)) 
     .accounts({

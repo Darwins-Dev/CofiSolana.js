@@ -18,7 +18,7 @@ export async function withdrawInstruction(
 
   const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
-  const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
+  const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(cluster);
   const feeReceiver = await ACCOUNTS.COFI_FEE_RECEIVER(cluster);
 
   return await cofiProgram.methods.withdraw(new BN(amount))

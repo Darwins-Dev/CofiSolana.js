@@ -17,7 +17,7 @@ export async function collectInterestInstruction(
   const cofiTimerAccount = await getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccount);
   const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
-  const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
+  const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(cluster);
   const feeReceiver = await ACCOUNTS.COFI_FEE_RECEIVER(cluster);
 
   const cofiTimerAccountState = await getCofiTimerAccount(cofiSolanaConfig, cofiTimerAccount);

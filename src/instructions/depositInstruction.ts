@@ -18,7 +18,7 @@ export async function depositInstruction(
 
   const cofiMint = await ACCOUNTS.COFI_MINT(cluster);
   const strategy = await ACCOUNTS.COFI_STRATEGY(version, cluster);
-  const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(version, cluster);
+  const collateralReserve = await ACCOUNTS.COFI_COLLATERAL_RESERVE(cluster);
   
   return await cofiProgram.methods.deposit(new BN(amount))
     .accounts({

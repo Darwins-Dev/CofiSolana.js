@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ACCOUNTS = exports.MAINNET_COFI_TIMER_USDC = exports.MAINNET_COFI_USDC = exports.MAINNET_COFI_STRATEGY_USDC = exports.MAINNET_USDC_MINT = exports.MAINNET_USDC_RESERVE_LIQ_SUPPLY = exports.MAINNET_USDC_CTOKEN = exports.MAINNET_USDC_RESERVE = exports.MAINNET_LENDING_MARKET_AUTH = exports.MAINNET_LENDING_MARKET = exports.MAINNET_PROGRAM_ID = exports.MAINNET_COFI_USDC_FEE_RECEIVER = exports.DEVNET_COFI_SIMP_FEE_RECEIVER = exports.DEVNET_COFI_TIMER_SIMP = exports.DEVNET_COFI_STRATEGY_SIMP = exports.DEVNET_COFI_SIMP = exports.DEVNET_COFI_STRATEGY_SOL = exports.DEVNET_COFI_SOL = exports.DEVNET_SIMP_LIQ_SUPPLY = exports.DEVNET_SIMP_CTOKEN = exports.DEVNET_SIMP_MINT = exports.DEVNET_SOL_RESERVE_LIQ_SUPPLY = exports.DEVNET_SOL_CTOKEN = exports.DEVNET_SOL_RESERVE = exports.DEVNET_SOL_MINT = exports.DEVNET_USDC_MINT = exports.DEVNET_USDC_RESERVE_LIQ_SUPPLY = exports.DEVNET_USDC_CTOKEN = exports.DEVNET_USDC_RESERVE = exports.DEVNET_LENDING_MARKET_AUTH = exports.DEVNET_LENDING_MARKET = exports.DEVNET_PROGRAM_ID = void 0;
+exports.ACCOUNTS = exports.MAINNET_COFI_TIMER_USDC = exports.MAINNET_COFI_USDC = exports.MAINNET_COFI_STRATEGY_USDC = exports.MAINNET_USDC_MINT = exports.MAINNET_USDC_RESERVE_LIQ_SUPPLY = exports.MAINNET_USDC_CTOKEN = exports.MAINNET_USDC_RESERVE = exports.MAINNET_LENDING_MARKET_AUTH = exports.MAINNET_LENDING_MARKET = exports.MAINNET_PROGRAM_ID = exports.MAINNET_COFI_USDC_FEE_RECEIVER = exports.DEVNET_COFI_SIMP_FEE_RECEIVER = exports.DEVNET_COFI_TIMER_SIMP = exports.DEVNET_COFI_STRATEGY_SIMP = exports.DEVNET_COFI_SIMP = exports.DEVNET_COFI_STRATEGY_SOL = exports.DEVNET_COFI_SOL = exports.DEVNET_SIMP_LIQ_SUPPLY = exports.DEVNET_SIMP_CTOKEN = exports.DEVNET_SIMP_MINT = exports.DEVNET_SOL_RESERVE_LIQ_SUPPLY = exports.DEVNET_SOL_CTOKEN = exports.DEVNET_SOL_RESERVE = exports.DEVNET_SOL_MINT = exports.DEVNET_USDC_MINT = exports.DEVNET_USDC_RESERVE_LIQ_SUPPLY = exports.DEVNET_USDC_CTOKEN = exports.DEVNET_USDC_RESERVE = exports.DEVNET_LENDING_MARKET_AUTH = exports.DEVNET_LENDING_MARKET = exports.DEVNET_PROGRAM_ID = exports.DEVNET_INITIALIZER = void 0;
 const anchor_1 = require("@project-serum/anchor");
+exports.DEVNET_INITIALIZER = new anchor_1.web3.PublicKey("12T6Vum2gmgRzYqcQVDkUD3nR9zQ5Ub5Bb8zPBM4KjHa");
 exports.DEVNET_PROGRAM_ID = new anchor_1.web3.PublicKey("ALend7Ketfx5bxh6ghsCDXAoDrhvEmsXT3cynB6aPLgx");
 exports.DEVNET_LENDING_MARKET = new anchor_1.web3.PublicKey("GvjoVKNjBvQcFaSKUW1gTE7DxhSpjHbE69umVR5nPuQp");
 exports.DEVNET_LENDING_MARKET_AUTH = new anchor_1.web3.PublicKey("EhJ4fwaXUp7aiwvZThSUaGWCaBQAJe3AEaJJJVCn3UCK");
@@ -22,9 +23,9 @@ exports.DEVNET_SOL_MINT = new anchor_1.web3.PublicKey("So11111111111111111111111
 exports.DEVNET_SOL_RESERVE = new anchor_1.web3.PublicKey("5VVLD7BQp8y3bTgyF5ezm1ResyMTR3PhYsT4iHFU8Sxz");
 exports.DEVNET_SOL_CTOKEN = new anchor_1.web3.PublicKey("FzwZWRMc3GCqjSrcpVX3ueJc6UpcV6iWWb7ZMsTXE3Gf");
 exports.DEVNET_SOL_RESERVE_LIQ_SUPPLY = new anchor_1.web3.PublicKey("furd3XUtjXZ2gRvSsoUts9A5m8cMJNqdsyR2Rt8vY9s");
-exports.DEVNET_SIMP_MINT = new anchor_1.web3.PublicKey("8xGPSDNuXMmSmBpNGot6MDRPGteBpFevCPgM26MfrpCx");
-exports.DEVNET_SIMP_CTOKEN = new anchor_1.web3.PublicKey("4cjJuRxYdwWgXHwec5e3zaXpAjutvtcphGjMu31zE5Uc");
-exports.DEVNET_SIMP_LIQ_SUPPLY = new anchor_1.web3.PublicKey("3zxdUBXbMRpsACGCQFLYdP2izZ561JLN2VDZTUoNdYpz");
+exports.DEVNET_SIMP_MINT = new anchor_1.web3.PublicKey("9q5uafWGSszbRxSz7R9gTFnzgwNhwf9XzJRdukkbo3eW");
+exports.DEVNET_SIMP_CTOKEN = new anchor_1.web3.PublicKey("F8zgkjUbKkTQf2bWryvZJr6VCEbSXUGSSR6stzQ1sNAu");
+exports.DEVNET_SIMP_LIQ_SUPPLY = new anchor_1.web3.PublicKey("C2VSqhnREkvUsJmoSFeuWWagofWPMxUNx3ndTvujYPvM");
 exports.DEVNET_COFI_SOL = new anchor_1.web3.PublicKey("2Xi8qBg2T66Q6SDoLq4mwU7wW3Yf4SAFZRocD2nZdzAe");
 exports.DEVNET_COFI_STRATEGY_SOL = new anchor_1.web3.PublicKey("9MKNtecXPBb6WxF36fhDDX1tBqTe4LeuCYfkgmUUkpaq");
 exports.DEVNET_COFI_SIMP = new anchor_1.web3.PublicKey("BLG2ZfiVKRWtcy1aqAjeUFabRtkRA7y7HsBmodfyh6gh");
@@ -140,7 +141,7 @@ exports.ACCOUNTS = {
         }
     },
     COFI_MINT: (cluster) => __awaiter(void 0, void 0, void 0, function* () {
-        return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_mint', 'utf-8'), exports.ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
+        return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_mint', 'utf-8'), exports.ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer(), exports.DEVNET_INITIALIZER.toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     }),
     COFI_FEE_RECEIVER: (cluster) => __awaiter(void 0, void 0, void 0, function* () {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_fee_receiver', 'utf-8'), (yield exports.ACCOUNTS.COFI_MINT(cluster)).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
@@ -152,12 +153,14 @@ exports.ACCOUNTS = {
             Uint8Array.from([version, 0, 0, 0, 0, 0, 0, 0, 0]),
         ], exports.ACCOUNTS.COFI_STRATEGY_PROGRAM_ID(cluster)))[0];
     }),
-    COFI_COLLATERAL_RESERVE: (version, cluster) => __awaiter(void 0, void 0, void 0, function* () {
+    COFI_COLLATERAL_RESERVE: (cluster) => __awaiter(void 0, void 0, void 0, function* () {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_collateral_reserve', 'utf-8'),
-            exports.ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
+            exports.ACCOUNTS.SOLEND_CTOKEN(cluster).toBuffer(),
+            (yield exports.ACCOUNTS.COFI_MINT(cluster)).toBuffer(),], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     }),
-    COFI_LIQUIDITY_RESERVE: (version, cluster) => __awaiter(void 0, void 0, void 0, function* () {
+    COFI_LIQUIDITY_RESERVE: (cluster) => __awaiter(void 0, void 0, void 0, function* () {
         return (yield anchor_1.web3.PublicKey.findProgramAddress([Buffer.from('cofi_liquidity_reserve', 'utf-8'),
-            exports.ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer()], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
+            exports.ACCOUNTS.LIQUIDITY_MINT(cluster).toBuffer(),
+            (yield exports.ACCOUNTS.COFI_MINT(cluster)).toBuffer(),], exports.ACCOUNTS.COFI_PROGRAM_ID(cluster)))[0];
     }),
 };
