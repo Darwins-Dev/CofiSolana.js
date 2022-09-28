@@ -280,7 +280,27 @@ exports.IDL = {
     ],
     "events": [
         {
-            "name": "CofiTimerEvent",
+            "name": "InitTimerEvent",
+            "fields": [
+                {
+                    "name": "timerAccount",
+                    "type": "publicKey",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "WithdrawDepositEvent",
+            "fields": [
+                {
+                    "name": "timerAccount",
+                    "type": "publicKey",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "WithdrawInterestEvent",
             "fields": [
                 {
                     "name": "timerAccount",
