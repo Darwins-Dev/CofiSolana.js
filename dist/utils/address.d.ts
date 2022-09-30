@@ -1,6 +1,7 @@
 import { web3 } from '@project-serum/anchor';
 import { ClusterType } from '../types';
 export declare const DEVNET_INITIALIZER: web3.PublicKey;
+export declare const MAINNET_INITIALIZER: web3.PublicKey;
 export declare const DEVNET_PROGRAM_ID: web3.PublicKey;
 export declare const DEVNET_LENDING_MARKET: web3.PublicKey;
 export declare const DEVNET_LENDING_MARKET_AUTH: web3.PublicKey;
@@ -48,4 +49,5 @@ export declare const ACCOUNTS: {
     COFI_STRATEGY: (version: number, cluster: ClusterType) => Promise<web3.PublicKey>;
     COFI_COLLATERAL_RESERVE: (cluster: ClusterType) => Promise<web3.PublicKey>;
     COFI_LIQUIDITY_RESERVE: (cluster: ClusterType) => Promise<web3.PublicKey>;
+    MINT_INITIALIER: (cluster: ClusterType) => web3.PublicKey;
 };

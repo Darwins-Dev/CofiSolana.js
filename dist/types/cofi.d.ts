@@ -338,7 +338,7 @@ export declare type Cofi = {
                 },
                 {
                     "name": "cofiStakePair";
-                    "isMut": true;
+                    "isMut": false;
                     "isSigner": false;
                 },
                 {
@@ -398,7 +398,7 @@ export declare type Cofi = {
                 },
                 {
                     "name": "cofiStakePair";
-                    "isMut": true;
+                    "isMut": false;
                     "isSigner": false;
                 },
                 {
@@ -1087,53 +1087,73 @@ export declare type Cofi = {
         },
         {
             "code": 6001;
-            "name": "InvalidInitAccount";
-            "msg": "invalid initialization account";
-        },
-        {
-            "code": 6002;
-            "name": "InvalidWithdrawFee";
-            "msg": "invalid withdraw fee rate";
-        },
-        {
-            "code": 6003;
             "name": "MathOverflow";
             "msg": "math overflow";
         },
         {
-            "code": 6004;
+            "code": 6002;
             "name": "MathUnderflow";
             "msg": "math underflow";
         },
         {
-            "code": 6005;
+            "code": 6003;
             "name": "InsufficientShares";
             "msg": "not enough shares of collateral allocated to account";
         },
         {
-            "code": 6006;
+            "code": 6004;
             "name": "InsufficientDeposits";
             "msg": "not enough deposited liquidity in account";
         },
         {
-            "code": 6007;
+            "code": 6005;
             "name": "InsuffiientStakes";
             "msg": "not enough liquidity staked into account";
         },
         {
-            "code": 6008;
+            "code": 6006;
             "name": "ExceedsWithdrawable";
             "msg": "exceeds withdrawable liquidity amount";
         },
         {
-            "code": 6009;
+            "code": 6007;
             "name": "MintPaused";
             "msg": "mint is paused so cannot execute";
         },
         {
-            "code": 6010;
+            "code": 6008;
             "name": "AccountFrozen";
             "msg": "interacting with frozen account";
+        },
+        {
+            "code": 6009;
+            "name": "LockedStake";
+            "msg": "interacting with locked stake account";
+        },
+        {
+            "code": 6010;
+            "name": "InvalidCofiMint";
+            "msg": "incorrect mint account";
+        },
+        {
+            "code": 6011;
+            "name": "InvalidCofiStrategy";
+            "msg": "invalid strategy";
+        },
+        {
+            "code": 6012;
+            "name": "InvalidAccountAuthority";
+            "msg": "incorrect account authority";
+        },
+        {
+            "code": 6013;
+            "name": "InvalidStakerAccount";
+            "msg": "incorrect staker of cofi stake account";
+        },
+        {
+            "code": 6014;
+            "name": "InvalidBeneficiaryAccount";
+            "msg": "incorrect beneficiary of cofi stake account";
         }
     ];
 };

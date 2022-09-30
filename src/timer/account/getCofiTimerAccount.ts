@@ -34,7 +34,8 @@ export async function getCollectableInterest(
   const {
     version, cluster, provider,
   } = cofiSolanaConfig;
-  const cofiTimerAccount = await getCofiTimerAccount(cofiSolanaConfig, await getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccountPublicKey));
+  const cofiTimerAccount = 
+    await getCofiTimerAccount(cofiSolanaConfig, await getCofiTimerAddress(cofiSolanaConfig, timerOwnedAccountPublicKey));
   const withdrawableLiquidity = await getWithdrawableLiquidity(cofiSolanaConfig, timerOwnedAccountPublicKey, withdrawFeeRate);
   if(cofiTimerAccount.depositCollected) {
     return withdrawableLiquidity
