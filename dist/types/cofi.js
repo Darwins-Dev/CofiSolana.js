@@ -341,7 +341,7 @@ exports.IDL = {
                 },
                 {
                     "name": "cofiStakePair",
-                    "isMut": false,
+                    "isMut": true,
                     "isSigner": false
                 },
                 {
@@ -401,7 +401,7 @@ exports.IDL = {
                 },
                 {
                     "name": "cofiStakePair",
-                    "isMut": false,
+                    "isMut": true,
                     "isSigner": false
                 },
                 {

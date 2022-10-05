@@ -338,7 +338,7 @@ export type Cofi = {
         },
         {
           "name": "cofiStakePair",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -398,7 +398,7 @@ export type Cofi = {
         },
         {
           "name": "cofiStakePair",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1498,7 +1498,7 @@ export const IDL: Cofi = {
         },
         {
           "name": "cofiStakePair",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1558,7 +1558,7 @@ export const IDL: Cofi = {
         },
         {
           "name": "cofiStakePair",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {

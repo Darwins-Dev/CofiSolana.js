@@ -338,7 +338,7 @@ export declare type Cofi = {
                 },
                 {
                     "name": "cofiStakePair";
-                    "isMut": false;
+                    "isMut": true;
                     "isSigner": false;
                 },
                 {
@@ -398,7 +398,7 @@ export declare type Cofi = {
                 },
                 {
                     "name": "cofiStakePair";
-                    "isMut": false;
+                    "isMut": true;
                     "isSigner": false;
                 },
                 {
