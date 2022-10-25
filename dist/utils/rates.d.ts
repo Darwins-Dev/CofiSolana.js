@@ -1,5 +1,6 @@
 import { BN } from "@project-serum/anchor";
 import { CofiSolanaConfig } from "../types";
+export declare function getLiquidityToCollateralExchangeRate(cofiSolanaConfig: CofiSolanaConfig): Promise<BN>;
 export declare function liquidityToCollateral(cofiSolanaConfig: CofiSolanaConfig, liquidityAmount: BN | number | string): Promise<BN>;
 export declare function collateralToLiquidity(cofiSolanaConfig: CofiSolanaConfig, collateraAmount: BN | number | string): Promise<BN>;
 export declare function collateralToShares(cofiSolanaConfig: CofiSolanaConfig, collateralAmount: BN | number | string): Promise<BN>;

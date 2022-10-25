@@ -3,6 +3,13 @@ import { getCofiMintAccount, getCofiStrategyAccount } from "../account";
 import { CofiSolanaConfig, } from "../types";
 import { WAD } from "./constants";
 
+export async function getLiquidityToCollateralExchangeRate(
+  cofiSolanaConfig: CofiSolanaConfig
+): Promise<BN> {
+  let strategyState = await getCofiStrategyAccount(cofiSolanaConfig);
+  return strategyState.exchangeRate;
+}
+
 export async function liquidityToCollateral(
   cofiSolanaConfig: CofiSolanaConfig,
   liquidityAmount: BN | number | string,

@@ -34,16 +34,11 @@ function getWithdrawableLiquidity(cofiSolanaConfig, cofiAccountPublicKey, withdr
     return __awaiter(this, void 0, void 0, function* () {
         const { version, cluster, provider } = cofiSolanaConfig;
         let cofiAccount = yield getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
-        if (cofiAccountPublicKey.equals(yield address_1.ACCOUNTS.COFI_FEE_RECEIVER(cluster))) {
-            return (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount);
-        }
-        else {
-            let depositNstakes = cofiAccount.depositAmount.add(cofiAccount.stakeAmount);
-            let sharesAsLiquidity = yield (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount);
-            let interestGenerated = (sharesAsLiquidity.gt(depositNstakes)) ? sharesAsLiquidity.sub(depositNstakes) : new anchor_1.BN(0);
-            let withdrawFee = interestGenerated.mul(new anchor_1.BN(withdrawFeeRate)).div(new anchor_1.BN(1000000));
-            return sharesAsLiquidity.sub(cofiAccount.stakeAmount).sub(withdrawFee);
-        }
+        let depositNstakes = cofiAccount.depositAmount.add(cofiAccount.stakeAmount);
+        let sharesAsLiquidity = yield (0, __1.sharesToLiquidity)(cofiSolanaConfig, cofiAccount.shareAmount);
+        let interestGenerated = (sharesAsLiquidity.gt(depositNstakes)) ? sharesAsLiquidity.sub(depositNstakes) : new anchor_1.BN(0);
+        let withdrawFee = interestGenerated.mul(new anchor_1.BN(withdrawFeeRate)).div(new anchor_1.BN(1000000));
+        return sharesAsLiquidity.sub(cofiAccount.stakeAmount).sub(withdrawFee);
     });
 }
 exports.getWithdrawableLiquidity = getWithdrawableLiquidity;

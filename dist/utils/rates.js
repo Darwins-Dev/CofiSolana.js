@@ -9,10 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sharesToLiquidity = exports.liquidityToShares = exports.sharesToCollateral = exports.collateralToShares = exports.collateralToLiquidity = exports.liquidityToCollateral = void 0;
+exports.sharesToLiquidity = exports.liquidityToShares = exports.sharesToCollateral = exports.collateralToShares = exports.collateralToLiquidity = exports.liquidityToCollateral = exports.getLiquidityToCollateralExchangeRate = void 0;
 const anchor_1 = require("@project-serum/anchor");
 const account_1 = require("../account");
 const constants_1 = require("./constants");
+function getLiquidityToCollateralExchangeRate(cofiSolanaConfig) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let strategyState = yield (0, account_1.getCofiStrategyAccount)(cofiSolanaConfig);
+        return strategyState.exchangeRate;
+    });
+}
+exports.getLiquidityToCollateralExchangeRate = getLiquidityToCollateralExchangeRate;
 function liquidityToCollateral(cofiSolanaConfig, liquidityAmount) {
     return __awaiter(this, void 0, void 0, function* () {
         let amount = new anchor_1.BN(liquidityAmount);

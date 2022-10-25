@@ -38,16 +38,12 @@ export async function getWithdrawableLiquidity(
     version, cluster, provider
   } = cofiSolanaConfig;
   let cofiAccount = await getCofiAccount(cofiSolanaConfig, cofiAccountPublicKey);
-  if(cofiAccountPublicKey.equals(await ACCOUNTS.COFI_FEE_RECEIVER(cluster))) {
-    return sharesToLiquidity(cofiSolanaConfig, cofiAccount.shareAmount)
-  } else {
-    let depositNstakes = cofiAccount.depositAmount.add(cofiAccount.stakeAmount);
-    let sharesAsLiquidity = await sharesToLiquidity(cofiSolanaConfig, cofiAccount.shareAmount)
-    let interestGenerated = 
-      (sharesAsLiquidity.gt(depositNstakes))?sharesAsLiquidity.sub(depositNstakes):new BN(0)
-    let withdrawFee = interestGenerated.mul(new BN(withdrawFeeRate)).div(new BN(1000000));
-    return sharesAsLiquidity.sub(cofiAccount.stakeAmount).sub(withdrawFee)
-  }
+  let depositNstakes = cofiAccount.depositAmount.add(cofiAccount.stakeAmount);
+  let sharesAsLiquidity = await sharesToLiquidity(cofiSolanaConfig, cofiAccount.shareAmount)
+  let interestGenerated = 
+    (sharesAsLiquidity.gt(depositNstakes))?sharesAsLiquidity.sub(depositNstakes):new BN(0)
+  let withdrawFee = interestGenerated.mul(new BN(withdrawFeeRate)).div(new BN(1000000));
+  return sharesAsLiquidity.sub(cofiAccount.stakeAmount).sub(withdrawFee)
 }
 
 export async function getInterestGenerated(
